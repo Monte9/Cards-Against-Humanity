@@ -2,10 +2,8 @@
 
 one:
   game_id: 
-  user_id: 
-  score: 1.5
+  card_id: 1
 
 two:
   game_id: 
-  user_id: 
-  score: 1.5
+  card_id: 1

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class GameuserTest < ActiveSupport::TestCase
+class GameUserTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
