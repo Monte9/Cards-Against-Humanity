@@ -12,3 +12,19 @@ Team members-
 3. Iain
 
 4. Evan
+
+##To set up postgres
+
+```brew install postgres```
+
+```initdb /usr/local/var/postgres/data```
+
+```pg_ctl -D /usr/local/var/postgres/data -l logfile start```
+
+```createuser --superuser postgres```
+
+```createuser --createdb 667```
+
+```createdb -O 667 --encoding=UNICODE cards-against-humanity```
+
+```rake db:migrate```
