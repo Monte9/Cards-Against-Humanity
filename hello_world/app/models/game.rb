@@ -1,4 +1,4 @@
 class Game < ActiveRecord::Base
-	has_many :gameusers
+	has_many :game_users
 	has_many :rounds
 end
