@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  # get 'game/start'
+
+  # get 'game/end'
+
+  match ':controller(/:action(:/id))', :via => [:get, :post];
+
   devise_for :users
   get 'welcome/index'
 
