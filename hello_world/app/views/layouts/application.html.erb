@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>HelloWorld</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
@@ -11,9 +11,180 @@
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 
-<%= link_to "Sign Up", new_user_registration_path %>
-<%= link_to "Sign In", new_user_session_path %>
-<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+
+<!--MENU SECTION START-->
+<div class="navbar navbar-inverse navbar-fixed-top scroll-me" id="menu-section">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+
+        RAILS AGAINST HUMANITY
+
+      </a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Sign Up", new_user_registration_path %></li>
+        <li><%= link_to "Sign In", new_user_session_path %></li>
+        <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+
+      </ul>
+    </div>
+
+  </div>
+</div>
+<!--MENU SECTION END-->
+
+<!--HOME SECTION START-->
+<div id="home">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 ">
+        <div id="carousel-slider" data-ride="carousel" class="carousel slide  animate-in" data-anim-type="fade-in-up">
+
+          <div class="carousel-inner">
+            <div class="item active">
+
+              <h3>
+                This will be a winning card combination.
+              </h3>
+              <p>
+                Lorem ipsumdolor sitamet, consect adipiscing elit
+                Lorem ipsumdolor sitamet, consect adipiscing elit.
+                Lorem ipsumdolor sitamet, consect adipiscing elit
+                Lorem ipsumdolor sitamet, consect adipiscing elit.
+              </p>
+            </div>
+            <div class="item">
+              <h3>
+                This will be another one!
+              </h3>
+              <p>
+                Lorem ipsumdolor sitamet, consect adipiscing elit
+                Lorem ipsumdolor sitamet, consect adipiscing elit.
+                Lorem ipsumdolor sitamet, consect adipiscing elit
+                Lorem ipsumdolor sitamet, consect adipiscing elit.
+              </p>
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+    </div>
+    <div class="row animate-in" data-anim-type="fade-in-up">
+      <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 scroll-me">
+
+
+        <p>
+          This line is fixed so you can write anything
+
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--HOME SECTION END-->
+
+<!--GRID SECTION START-->
+<section id="grid" >
+  <div class="container">
+    <div class="row text-center header animate-in" data-anim-type="fade-in-up">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+        <h3>Open Games</h3>
+        <hr />
+
+      </div>
+    </div>
+    <div class="row pad-bottom animate-in" data-anim-type="fade-in-up">
+
+      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <h2>Open Game 1</h2>
+        <ul>
+          <li>Evan</li>
+          <li>Monte</li>
+          <li>Open</li>
+          <li>Open</li>
+        </ul>
+
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <h2>Open Game 1</h2>
+        <ul>
+          <li>Evan</li>
+          <li>Monte</li>
+          <li>Open</li>
+          <li>Open</li>
+        </ul>
+
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <h2>Open Game 1</h2>
+        <ul>
+          <li>Evan</li>
+          <li>Monte</li>
+          <li>Open</li>
+          <li>Open</li>
+        </ul>
+
+      </div>
+
+    </div>
+    <div class="row pad-bottom animate-in" data-anim-type="fade-in-up">
+
+      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <h2>Open Game 1</h2>
+        <ul>
+          <li>Evan</li>
+          <li>Monte</li>
+          <li>Open</li>
+          <li>Open</li>
+        </ul>
+
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <h2>Open Game 1</h2>
+        <ul>
+          <li>Evan</li>
+          <li>Monte</li>
+          <li>Open</li>
+          <li>Open</li>
+        </ul>
+
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <h2>Open Game 1</h2>
+        <ul>
+          <li>Evan</li>
+          <li>Monte</li>
+          <li>Open</li>
+          <li>Open</li>
+        </ul>
+
+      </div>
+
+    </div>
+
+
+
+
+    </div>
+  </div>
+</section>
+<!--GRID SECTION END-->
+
+
+
 
 <%= yield %>
 
