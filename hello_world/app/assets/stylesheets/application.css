@@ -12,4 +12,10 @@
  *
  *= require_tree .
  *= require_self
+ *= require animations.min.css
+ *= require bootstrap.css
+ *= require font-awesome.css
+ *= require ionicons.css
+ *= require style-solid-black.css
+ *= require jquery.fancybox.css
  */
