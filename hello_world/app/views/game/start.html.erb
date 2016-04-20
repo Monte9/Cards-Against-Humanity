@@ -1,4 +1,27 @@
-<h1>Game#start</h1>
-<p>Find me in app/views/game/start.html.erb</p>
-
-<%= link_to("NEW", {:action=> 'start', :id => 1}) %>
+<header>
+  <%= render 'layouts/application' %>
+</header>
+<div id="chat-wrapper">
+	<div class="container">
+		<h1>Game <%= :id %></h1>
+    	<div class="row">
+      		<div class="col-sm-8">
+      			<h2>Table</h2>
+      		</div>
+      		<div class="col-sm-4">
+      			<h2>Chat Window</h2>
+      			<div id="message">
+      				<div id="chat">
+      					Name Message Timestamp
+      				</div>
+				</div>
+				<form class="form-inline">
+					<div class="form-group">
+						<input type="text" class="form-control" id="chatbox" placeholder="Enter a message">
+						<button type="submit" class="btn btn-primary">Send</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
