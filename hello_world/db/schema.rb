@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420020942) do
+ActiveRecord::Schema.define(version: 20160420022735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20160420020942) do
     t.boolean  "is_black"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "pick_count"
   end
 
   create_table "game_cards", force: :cascade do |t|
