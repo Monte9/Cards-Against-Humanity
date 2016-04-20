@@ -17,6 +17,6 @@ white_cards.each{|data|
 
 black_cards = cards['blackCards']
 black_cards.each{|data| 
-	Card.create(text: data["text"], is_black: true, pick_count: data["pick"])
+	Card.create(text: data["text"], is_black: true, pick_count: data["pick"])	
 }
 
