@@ -1,6 +1,8 @@
 <header>
   <%= render 'layouts/application' %>
+  <%= render 'layouts/menu' %>
 </header>
+
 <div id="chat-wrapper">
 	<div class="container">
 		<h1>Game <%= :id %></h1>
@@ -12,16 +14,15 @@
       			<h2>Chat Window</h2>
       			<div id="message">
       				<div id="chat">
-      					Name Message Timestamp
       				</div>
 				</div>
-				<form class="form-inline">
-					<div class="form-group">
-						<input type="text" class="form-control" id="chatbox" placeholder="Enter a message">
-						<button type="submit" class="btn btn-primary">Send</button>
-					</div>
-				</form>
+				<div class="form-group">
+					<input type="text" class="form-control" id="chatbox" placeholder="Enter a message">
+					<button class="btn btn-primary" id="sendChat">Send</button>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+<script src="https://js.pusher.com/3.0/pusher.min.js"></script>

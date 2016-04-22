@@ -27,6 +27,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #Use devise for user authentication on website
 gem 'devise'
 
+gem 'pusher'
+
 gem "rails-erd"
 
 # Use ActiveModel has_secure_password
