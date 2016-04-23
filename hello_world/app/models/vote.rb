@@ -1,5 +1,5 @@
-	#t.integer  "user_id"
-    #t.integer  "card_id"
+	#t.integer  "game_user_id"
+    #t.integer  "game_card_id"
     #t.integer  "round_id"
     #t.datetime "created_at", null: false
     #t.datetime "updated_at", null: false

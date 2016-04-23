@@ -90,9 +90,10 @@ ActiveRecord::Schema.define(version: 20160423221645) do
   end
 
   create_table "winning_combos", force: :cascade do |t|
-    t.integer  "card_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "black_card_id"
+    t.integer  "white_card_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
 end
