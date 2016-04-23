@@ -8,7 +8,6 @@
 class GamesController < ApplicationController
 def create
 	@game = Game.new
-	@game.user_id = params[:id]
 	@game.save
 	render :json => @game
 end
