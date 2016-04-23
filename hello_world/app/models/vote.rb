@@ -1,5 +1,11 @@
+	#t.integer  "user_id"
+    #t.integer  "card_id"
+    #t.integer  "round_id"
+    #t.datetime "created_at", null: false
+    #t.datetime "updated_at", null: false
+
 class Vote < ActiveRecord::Base
-	has_many :users
-	has_many :cards
-	has_many :rounds
+	belongs_to :game_users
+	belongs_to :round
+	belongs_to :game_card
 end
