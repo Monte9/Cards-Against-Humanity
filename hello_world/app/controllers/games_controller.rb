@@ -1,3 +1,10 @@
+	#FOR REFRENCE: ATTRIBUTES OF THIS MODEL
+	#t.integer  "dealer_id"
+    #t.integer  "round_id"
+    #t.datetime "created_at", null: false
+    #t.datetime "updated_at", null: false
+    #t.integer  "user_id"
+
 class GamesController < ApplicationController
 def create
 	@game = Game.new
@@ -7,21 +14,8 @@ def create
 end
 
 
-def join
-	@game = Game.find(params[:game_id])
-	@game.user_id = params[:id]
-	@game.save
-	@games = Game.all
-	render :json => @games
-end
-
-
 def index
-	#TODO : this can't be all the games 
-
-	
-	
-	
+	#TODO : this can't be all the games	
  @games = Game.all 
  render	:json => @games
 end
