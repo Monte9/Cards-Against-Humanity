@@ -5,7 +5,7 @@
     #t.datetime "updated_at", null: false
 
 class Vote < ActiveRecord::Base
-	belongs_to :game_users
+	belongs_to :game_user
 	belongs_to :round
 	belongs_to :game_card
 end
