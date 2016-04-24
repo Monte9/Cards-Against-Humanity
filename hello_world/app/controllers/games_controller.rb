@@ -6,6 +6,9 @@
     #t.integer  "user_id"
 
 class GamesController < ApplicationController
+
+
+#this create should be called with game_cards create.
 def create
 	@game = Game.new
 	@game.save
@@ -18,6 +21,8 @@ def index
  @games = Game.all 
  render	:json => @games
 end
+
+
 
 
 
