@@ -1,8 +1,46 @@
 #message {
-	min-height: 500px;
-	border-style: solid;
-    border-width: 3px;
-    border-color: #ffffff;
+	min-height: 300px;
+	border-style: none;
+    box-shadow: inset 0 0 .2em #fff;
+    padding: 10px;
+}
+#chatbox {
+	background-color: #000;
+	border-style: none;
+    box-shadow: inset 0 0 .2em #fff;
+    border-radius: 0px;
+}
+#sendChat {
+	border-radius: 0px;
 }
 
 
+#table {
+}
+
+#playing-field {
+	min-height: 300px;
+}
+#table-footer {
+	min-height: 150px;
+}
+
+#timer {
+	border-style: none;
+    box-shadow: inset 0 0 .2em #fff;
+    padding: 10px;
+    min-height: 150px;
+}
+#hand {
+	border-style: none;
+    box-shadow: inset 0 0 .2em #fff;
+    padding: 10px;
+    min-height: 150px;
+}
+
+#player-list {
+	min-height: 150px;
+	border-style: none;
+    box-shadow: inset 0 0 .2em #fff;
+    padding: 10px;
+}

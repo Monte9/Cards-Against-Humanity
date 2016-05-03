@@ -1,27 +1,49 @@
 <header>
   <%= render 'layouts/application' %>
+  <%= render 'layouts/menu' %>
 </header>
+
 <div id="chat-wrapper">
 	<div class="container">
 		<h1>Game <%= :id %></h1>
     	<div class="row">
-      		<div class="col-sm-8">
-      			<h2>Table</h2>
+      		<div class="col-sm-9" id="table">
+            <div class="row" id="playing-field">
+              
+            </div>
+            <div class="row" id="table-footer">
+              <div class="col-sm-3" id="timer">
+                
+              </div>
+              <div class="col-sm-9" id="hand">
+                
+              </div>
+            </div>
       		</div>
-      		<div class="col-sm-4">
-      			<h2>Chat Window</h2>
-      			<div id="message">
-      				<div id="chat">
-      					Name Message Timestamp
-      				</div>
-				</div>
-				<form class="form-inline">
-					<div class="form-group">
-						<input type="text" class="form-control" id="chatbox" placeholder="Enter a message">
-						<button type="submit" class="btn btn-primary">Send</button>
-					</div>
-				</form>
-			</div>
-		</div>
+      		<div class="col-sm-3">
+            <div class="row">
+              <div id="player-list">
+                <ol>
+                  <li><%= current_user.email %></li>
+                </ol>
+              </div>
+            </div>
+            <div class="row">
+              <div id="message">
+                <div id="chat">
+                </div>
+              </div>
+              <div class="form-inline">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="chatbox" placeholder="Enter a message">
+                </div>
+                <button class="btn btn-default" id="sendChat">Send</button>
+              </div>
+            </div>
+      			
+    			</div>
+  		</div>
 	</div>
 </div>
+
+<script src="https://js.pusher.com/3.0/pusher.min.js"></script>

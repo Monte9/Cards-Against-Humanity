@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'chat/message'
+
   # get 'game/start'
 
   # get 'game/end'
