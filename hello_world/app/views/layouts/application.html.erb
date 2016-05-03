@@ -15,15 +15,16 @@
 
 <% unless current_user.nil?  %>
 <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-<%= link_to create_game_path, id: current_user.id%>
-<%= link_to "join", controller: "GameUsers", action: "join"%>
+<%= link_to 'Create Game',controller:"games", action:"create", :remote => true, :class => 'delete_game', id: current_user.id%>
+<%= link_to "join", controller: "GameUsers", action: "create"%>
 <% else %>
 	<%= link_to "Sign Up", new_user_registration_path %>
 	<%= link_to "Sign In", new_user_session_path %>	
 <% end %>
+<break>
 
-<%= yield %>`
+<%= link_to "GameUsers", controller: "game_users", action: "index" %>
+<%= yield %>
 
 </body>
 </html>
-`
