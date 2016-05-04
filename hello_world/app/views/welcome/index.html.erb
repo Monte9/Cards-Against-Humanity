@@ -1,2 +1,134 @@
-<h1>Hello World from Rails!</h1>
-<p>My name is Monte and I am now a professional Rails developer.</p>
+<header>
+  <%= render 'layouts/application' %>
+  <%= render 'layouts/menu' %>
+</header>
+
+<!--HOME SECTION START-->
+<div id="home">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 ">
+        <div id="carousel-slider" data-ride="carousel" class="carousel slide  animate-in" data-anim-type="fade-in-up">
+          <div class="carousel-inner">
+            <div class="item active">
+              <h3>
+                This will be a winning card combination.
+              </h3>
+              <p>
+                Lorem ipsumdolor sitamet, consect adipiscing elit
+                Lorem ipsumdolor sitamet, consect adipiscing elit.
+                Lorem ipsumdolor sitamet, consect adipiscing elit
+                Lorem ipsumdolor sitamet, consect adipiscing elit.
+              </p>
+            </div>
+            <div class="item">
+              <h3>
+                This will be another one!
+              </h3>
+              <p>
+                Lorem ipsumdolor sitamet, consect adipiscing elit
+                Lorem ipsumdolor sitamet, consect adipiscing elit.
+                Lorem ipsumdolor sitamet, consect adipiscing elit
+                Lorem ipsumdolor sitamet, consect adipiscing elit.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row animate-in" data-anim-type="fade-in-up">
+      <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 scroll-me">
+        <p>
+          This line is fixed so you can write anything
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--HOME SECTION END-->
+
+<!--GRID SECTION START-->
+<section id="grid" >
+  <div class="container">
+    <div class="row text-center header animate-in" data-anim-type="fade-in-up">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h3>Open Games</h3>
+        <hr />
+      </div>
+    </div>
+    <div class="row pad-bottom animate-in" data-anim-type="fade-in-up">
+      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <h2>Open Game 1</h2>
+        <ul>
+          <li>Evan</li>
+          <li>Monte</li>
+          <li>Open</li>
+          <li>Open</li>
+        </ul>
+        <%= link_to "Join", { :controller => :game, :action => :start, :id => 1}, { class: "btn button-custom btn-custom-two" } %>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <h2>Open Game 2</h2>
+        <ul>
+          <li>Susan</li>
+          <li>Veronica</li>
+          <li>Open</li>
+          <li>Open</li>
+          <li>Open</li>
+          <li>Open</li>
+        </ul>
+        <%= link_to "Join", { :controller => :game, :action => :start, :id => 2}, { class: "btn button-custom btn-custom-two" } %>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <h2>Open Game 3</h2>
+        <ul>
+          <li>Mark</li>
+          <li>James</li>
+          <li>Nancy</li>
+          <li>Open</li>
+        </ul>
+        <%= link_to "Join", { :controller => :game, :action => :start, :id => 3}, { class: "btn button-custom btn-custom-two" } %>
+      </div>
+    </div>
+    <div class="row pad-bottom animate-in" data-anim-type="fade-in-up">
+
+      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <h2>Open Game 4</h2>
+        <ul>
+          <li>Brittany</li>
+          <li>Liz</li>
+          <li>Open</li>
+          <li>Open</li>
+        </ul>
+        <%= link_to "Join", { :controller => :game, :action => :start, :id => 4}, { class: "btn button-custom btn-custom-two" } %>
+
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <h2>Open Game 5</h2>
+        <ul>
+          <li>Nate</li>
+          <li>Iain</li>
+          <li>Peter</li>
+          <li>Open</li>
+        </ul>
+        <%= link_to "Join", { :controller => :game, :action => :start, :id => 5}, { class: "btn button-custom btn-custom-two" } %>
+
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <h2>Open Game 6</h2>
+        <ul>
+          <li>John</li>
+          <li>Jan</li>
+          <li>Pat</li>
+          <li>Open</li>
+          <li>Open</li>
+          <li>Open</li>
+        </ul>
+        <%= link_to "Join", { :controller => :game, :action => :start, :id => 6}, { class: "btn button-custom btn-custom-two" } %>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+<!--GRID SECTION END-->

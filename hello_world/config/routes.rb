@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'chat/message'
+
   # get 'game/start'
 
   # get 'game/end'
@@ -9,6 +11,8 @@ Rails.application.routes.draw do
 
   devise_for :users
   get 'welcome/index'
+
+  resources :game
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,3 +1,52 @@
+<<<<<<< HEAD:hello_world/app/assets/stylesheets/games.scss
 // Place all the styles related to the games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+=======
+#message {
+	min-height: 300px;
+	border-style: none;
+    box-shadow: inset 0 0 .2em #fff;
+    padding: 10px;
+}
+#chatbox {
+	background-color: #000;
+	border-style: none;
+    box-shadow: inset 0 0 .2em #fff;
+    border-radius: 0px;
+}
+#sendChat {
+	border-radius: 0px;
+}
+
+
+#table {
+}
+
+#playing-field {
+	min-height: 300px;
+}
+#table-footer {
+	min-height: 150px;
+}
+
+#timer {
+	border-style: none;
+    box-shadow: inset 0 0 .2em #fff;
+    padding: 10px;
+    min-height: 150px;
+}
+#hand {
+	border-style: none;
+    box-shadow: inset 0 0 .2em #fff;
+    padding: 10px;
+    min-height: 150px;
+}
+
+#player-list {
+	min-height: 150px;
+	border-style: none;
+    box-shadow: inset 0 0 .2em #fff;
+    padding: 10px;
+}
+>>>>>>> master:hello_world/app/assets/stylesheets/game.scss
