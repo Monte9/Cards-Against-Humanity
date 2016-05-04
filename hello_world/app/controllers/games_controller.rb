@@ -26,6 +26,7 @@ def index offsetV=0
 #TODO : this can't be all the games	
  @games = Game.limit(20).offset(offsetV) 
  #render	:json => @games
+ render 'index'
 end
 
 

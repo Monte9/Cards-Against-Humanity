@@ -1,0 +1,97 @@
+<header>
+  <%= render 'layouts/application' %>
+  <%= render 'layouts/menu' %>
+</header>
+
+<!--HOME SECTION START-->
+<div id="home">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 ">
+        <div id="carousel-slider" data-ride="carousel" class="carousel slide  animate-in" data-anim-type="fade-in-up">
+          <div class="carousel-inner">
+            <div class="item active">
+              <h3>
+                This will be a winning card combination.
+              </h3>
+              <p>
+                Lorem ipsumdolor sitamet, consect adipiscing elit
+                Lorem ipsumdolor sitamet, consect adipiscing elit.
+                Lorem ipsumdolor sitamet, consect adipiscing elit
+                Lorem ipsumdolor sitamet, consect adipiscing elit.
+              </p>
+            </div>
+            <div class="item">
+              <h3>
+                This will be another one!
+              </h3>
+              <p>
+                Lorem ipsumdolor sitamet, consect adipiscing elit
+                Lorem ipsumdolor sitamet, consect adipiscing elit.
+                Lorem ipsumdolor sitamet, consect adipiscing elit
+                Lorem ipsumdolor sitamet, consect adipiscing elit.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row animate-in" data-anim-type="fade-in-up">
+      <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 scroll-me">
+        <p>
+          This line is fixed so you can write anything
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--HOME SECTION END-->
+
+<!--GRID SECTION START-->
+
+	
+
+<section id="grid" >
+  <div class="container">
+    <div class="row text-center header animate-in" data-anim-type="fade-in-up">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h3><%= link_to "Create Game", controller: "games", action: "create" %></h3>
+        <hr />
+        <h3>Open Games</h3>
+      </div>
+    </div>
+    <div class="row pad-bottom animate-in" data-anim-type="fade-in-up">
+          <% i = 0 %>
+        	<% @games.each do |game| %>
+        	 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                <% i+=1 %>
+             		<h2>Open Game <%= i %></h2>
+                <ul> 
+        			<li><%= game.id %></li>
+        			<li><%= game.created_at %></li>
+        			<%= link_to "Join", {controller: "game_user", action: "create", id: game.id},
+        			{class: "btn button-custom btn-custom-two" } %>
+                </ul>
+              </div>
+        	   <% end %>
+    </div>
+    </div>
+  </div>
+</section>
+<!--GRID SECTION END-->
+
+<script>
+$(document).ready( function() {
+	$('a.join-game').on( 'click', function(event) {
+		event.stopPropagation();
+
+		var gameId = $(this).data('game-id');
+		var userId = $(this).data( 'user-id' );
+
+		$.post( $(this).attr('href'), { user_id: userId, game_id: gameId }, function(result) {
+			
+		});
+	});
+});
+</script>
