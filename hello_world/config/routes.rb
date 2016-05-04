@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'game_users/create'
+
+  get 'game_users/delete'
+
+  get 'game_users/update'
+
   get 'chat/message'
 
   # get 'game/start'
