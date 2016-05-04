@@ -3,8 +3,6 @@
 Built for CSC 667- Cards against humanity game using Ruby on rails.
 
 ## Cards against humanity game
-
-Team members-
 1. Monte 
 
 2. Nate
@@ -12,6 +10,10 @@ Team members-
 3. Iain
 
 4. Evan
+
+
+
+
 
 ##To set up postgres
 
