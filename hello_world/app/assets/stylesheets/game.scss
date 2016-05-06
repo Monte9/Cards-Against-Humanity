@@ -23,20 +23,51 @@
     padding-right: 2px;
     float: right;
 }
-
+#voting-cards {
+    overflow-y: scroll;
+}
 
 #table {
+}
+div.vote-buttons {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+}
+button.down-vote {
+    float: right;
+    border-style: none;
+    padding: 0px;
+}
+button.up-vote {
+    float: right;
+    border-style: none;
+    padding: 0px;
 }
 
 #playing-field {
 	min-height: 300px;
 }
 
-div.white-card {
-    background-color: #fff;
+#black-card {
     min-height: 200px;
     border-radius: 10px;
-    padding-top: 20px;
+    border-style: solid;
+    border-width: 1px;  
+    border-color: #808080;
+    font-size: 20px;
+    font-weight: bold;
+    hyphens: auto;
+    padding: 10px;
+}
+
+div.white-card {
+    background-color: #fff;
+    min-height: 100px;
+    border-radius: 10px;
+    padding-top: 10px;
+    margin-bottom:2px;
+    padding-bottom: 30px;
 }
 span.white-card-text {
     color: #000;
@@ -47,6 +78,10 @@ span.white-card-text {
 
 #table-footer {
 	min-height: 200px;
+    border-top-style: solid;
+    border-top-color: #fff;
+    border-top-width: 2px; 
+    padding-top: 10px;
 }
 
 #timer {
@@ -60,12 +95,36 @@ span.white-card-text {
 #hand {
 	border-style: none;
     min-height: 200px;
+    overflow-y: scroll;
+    max-height: 200px;
+    padding-right: 20px;
 }
 
+div#hand div.row {
+    margin-bottom: 10px;
+}
+ 
 #player-list {
 	min-height: 150px;
 	border-style: solid;
     border-width: 1px;
     border-color: #808080;
-    padding: 10px;
+    overflow: scroll;
+}
+
+table#scoreboard {
+    font-size: 12px;
+    font-weight: normal;
+    border-collapse: collapse;
+    border-spacing: 0px;
+    width: 100%;
+}
+
+table#scoreboard  th, td{
+    padding: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0px;
+    border-color: #808080;
+
 }

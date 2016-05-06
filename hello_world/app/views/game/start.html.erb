@@ -5,30 +5,28 @@
 
 <div id="chat-wrapper">
 	<div class="container">
-		<h4>Game <%= :id %></h4>
+		<h4 id="game-id">Game </h4>
     	<div class="row">
       		<div class="col-sm-10" id="table">
             <div class="row" id="playing-field">
-              
+              <div class="col-sm-2 col-sm-offset-1">
+                <div id="black-card">
+                </div>
+              </div>
+              <div class="col-sm-8 col-sm-offset-1" id="voting-cards">
+                <div class="row" id="voting-row-1">
+                  
+                </div>
+              </div>
             </div>
             <div class="row" id="table-footer">
               <div class="col-sm-3" id="timer">
                 
               </div>
               <div class="col-sm-9" id="hand">
-                <div class="row">
-                  <div class="col-sm-2 white-card">
-                    <span class="white-card-text">Being on fire.</span>
-                  </div>
-                  <div class="col-sm-2 col-sm-offset-1 white-card">
-                    <span class="white-card-text">Racism.</span>
-                  </div>
-                  <div class="col-sm-2 col-sm-offset-1 white-card">
-                    <span class="white-card-text">Old-people smell.</span>
-                  </div>
-                  <div class="col-sm-2 col-sm-offset-1 white-card">
-                    <span class="white-card-text">A micro&shy;penis.</span>
-                  </div>
+                <div class="row" id="hand-row-1">
+                </div>
+                <div class="row" id="hand-row-2">
                 </div>
               </div>
             </div>
@@ -36,9 +34,11 @@
       		<div class="col-sm-2">
             <div class="row">
               <div id="player-list">
-                <ol>
-                  <li><%= current_user.email %></li>
-                </ol>
+                <table id="scoreboard">
+                  <tr>
+                    <th>User</th><th>Score</th>
+                  </tr>
+                </table>
               </div>
             </div>
             <div class="row">
