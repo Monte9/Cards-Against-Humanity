@@ -21,11 +21,17 @@ class GamesController < ApplicationController
 	#render :json => @game
 #end
 
-
 def index offsetV=0
-#TODO : this can't be all the games	
- @games = Game.limit(20).offset(offsetV) 
+#TODO : this can't be all the games
+games = Game.last(20).select do |game| game.open? end
+#@games = Game.last(10).where(open?).reverse
+ #@games = Game.limit(20).offset(offsetV) 
  #render	:json => @games
+ @games_players = Hash.new 
+ games.each do |game|
+    players = game.get_game_user_names
+    @games_players["game.id"] = players
+  end
  render 'index'
 end
 
