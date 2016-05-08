@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160424015407) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20160507221604) do
 
   create_table "cards", force: :cascade do |t|
     t.string   "text"
@@ -55,11 +52,19 @@ ActiveRecord::Schema.define(version: 20160424015407) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "round_cards", force: :cascade do |t|
+    t.string   "game_card_id"
+    t.string   "game_user_id"
+    t.string   "round_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "rounds", force: :cascade do |t|
     t.integer  "game_id"
-    t.integer  "card_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "game_card_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -84,9 +89,9 @@ ActiveRecord::Schema.define(version: 20160424015407) do
 
   create_table "votes", force: :cascade do |t|
     t.integer  "round_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.integer  "game_card_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "round_card_id"
     t.integer  "game_user_id"
   end
 

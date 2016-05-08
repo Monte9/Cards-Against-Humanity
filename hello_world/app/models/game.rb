@@ -1,3 +1,6 @@
+
+#Game ends when either the cards are done or num plyers is less than 3.
+
 class Game < ActiveRecord::Base
 
 	has_many :game_users
