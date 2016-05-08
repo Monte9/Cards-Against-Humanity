@@ -3,11 +3,13 @@
 class Round < ActiveRecord::Base
 
 	belongs_to :game
+	has_one :game_black_card
 	has_many :round_cards
 	has_many :votes
 	has_many :game_users, through: :game
 
 	after_create :request_black_card
+	before_destroy :update_score
 
 	def all_votes_in?
 		votes.count == game_users.count
@@ -33,8 +35,15 @@ class Round < ActiveRecord::Base
 		@votes ||=  result[1]
 	end
 
+	def update_score
+		@winner_game_user.add_to_score 10
+	end
+
+	
+
 	def request_black_card
-		game_card_id = GameCard.where("")
+		black_card  = GameBlackCard.find_by_game_id_and_round_id(game_id, -1)
+		black_card.update(round_id: id)
 	end
 
 end

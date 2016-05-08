@@ -10,15 +10,16 @@ class GameCard < ActiveRecord::Base
 	has_one :vote
 
 	def self.generate_deque g_id
-		cards = Card.all
+		cards = Card.where("is_black=?", false)
 		ActiveRecord::Base.transaction do
   			cards.each { |card|
-  				GameCard.create(card_id: card.id, game_id: g_id, game_user_id: -1)
+  					GameCard.create(card_id: card.id, game_id: g_id, game_user_id: -1)	
   			}
 		end
 	end
 
-	def self.assign gu_id, game_id, 
+	def self.assign gu_id 
+		
 		game_card = GameCard.limit(1).where("game_user_id =? AND game_id = ?", -1, game_id)
 		raise error if game_card.nil?
 		game_card.game_user_id = gu_id

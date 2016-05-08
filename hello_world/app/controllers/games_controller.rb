@@ -1,16 +1,5 @@
-	#FOR REFRENCE: ATTRIBUTES OF THIS MODEL
-	#t.integer  "dealer_id"
-    #t.integer  "round_id"
-    #t.datetime "created_at", null: false
-    #t.datetime "updated_at", null: false
-    #t.integer  "user_id"
-
-#create_table "games", force: :cascade do |t|
     #t.integer  "dealer_id"
     #t.integer  "round_id"
-    #t.datetime "created_at", null: false
-    #t.datetime "updated_at", null: false
-  #end
 class GamesController < ApplicationController
 
 
@@ -22,7 +11,6 @@ class GamesController < ApplicationController
 #end
 
 def index offsetV=0
-#TODO : this can't be all the games
 games = Game.last(20).select do |game| game.open? end
 #@games = Game.last(10).where(open?).reverse
  #@games = Game.limit(20).offset(offsetV) 
@@ -37,25 +25,13 @@ end
 
 
 def create
-  @game = Game.new(params[:user])
-  	if @game.save
-  		respond_to do |format|
-  			format.js{render :layout => false}
-  			format.html{render "application"}
-  		end
-  	end
+  @game = Game.create
 end
 
 
 def delete
-	Game.delete(params[:id])
+  Game.delete(params[:id])
 	#render 'index'	
 end
-
-
-
-
-
-
 
 end

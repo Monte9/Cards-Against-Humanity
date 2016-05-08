@@ -4,6 +4,8 @@ class GameUsersController < ApplicationController
   	@game_user = GameUser.new
   	@game_user.user_id = current_user.id
   	@game_user.game_id = params[:game_id]
+    @game_user.score = 0
+    @game_user.save
   end
 
   def delete
