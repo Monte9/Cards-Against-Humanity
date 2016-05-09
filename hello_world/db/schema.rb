@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(version: 20160508225405) do
   end
 
   create_table "game_black_cards", force: :cascade do |t|
-    t.integer "game_id"
     t.integer "card_id"
     t.integer "round_id"
+    t.integer "game_id"
   end
 
   create_table "game_cards", force: :cascade do |t|

@@ -18,12 +18,20 @@ class Game < ActiveRecord::Base
 		GameCard.assign g_id
 	end
 	
+	def current_round
+		Round.where("game_id = ?", id).order("created_at").last
+	end
+	
 	def setup
 		
 	end
 	
 	def open?
 		return self.game_users.all.size < 6 
+	end
+
+	def player_count
+		return game_users.count
 	end
 
 	

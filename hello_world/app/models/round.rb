@@ -14,6 +14,18 @@ class Round < ActiveRecord::Base
 	def all_votes_in?
 		votes.count == game_users.count
 	end
+
+
+
+	def all_cards_in?
+		pick_count  = game_black_card.pick_count
+		num_players = game_users.count
+		card_count = round_cards.count
+		return num_players*pick_count == card_count
+	end
+
+
+
 	
 	def get_winner
 		tally = Hash.new
@@ -35,6 +47,9 @@ class Round < ActiveRecord::Base
 		@votes ||=  result[1]
 	end
 
+
+
+
 	def update_score
 		@winner_game_user.add_to_score 10
 	end
@@ -42,8 +57,19 @@ class Round < ActiveRecord::Base
 	
 
 	def request_black_card
-		black_card  = GameBlackCard.find_by_game_id_and_round_id(game_id, -1)
+		black_cards  = GameBlackCard.where("game_id = ? AND round_id = ?", game_id, -1)
+		black_cards.each do |black_card|
+			if black_card.card.pick_count < num_cards_left
+				blk_card = black_card
+				break
+			end
+		end
 		black_card.update(round_id: id)
+	end
+
+	def num_cards_left
+		gu_id = game_users[0].id
+		GameCard.where("game_id = ? AND game_user_id = ?", game_id,gu_id ).count
 	end
 
 end
