@@ -62,14 +62,16 @@
       </div>
     </div>
     <div class="row pad-bottom animate-in" data-anim-type="fade-in-up">
-          <% i = 0 %>
-        	<% @games.each do |game| %>
+          <% i = @games_players.size+1 %>
+        	<% @games_players.each_pair do |game_id, players| %>
         	 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                <% i+=1 %>
+                <% i-=1 %>
              		<h2>Open Game <%= i %></h2>
                 <ul> 
-        			<li><%= game.id %></li>
-        			<li><%= game.created_at %></li>
+        			<li><%= game_id%></li>
+        			<% players.each do |player| %>
+                <li><%= player%></li>
+              <% end %>
         			<%= link_to "Join", {controller: "game_user", action: "create", id: game.id},
         			{class: "btn button-custom btn-custom-two" } %>
                 </ul>

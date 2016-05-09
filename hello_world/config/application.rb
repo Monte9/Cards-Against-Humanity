@@ -8,6 +8,8 @@ Bundler.require(*Rails.groups)
 
 module HelloWorld
   class Application < Rails::Application
+    config.PLAYER_THRESOLD = 3
+    config.NUM_CARDS = 10
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
