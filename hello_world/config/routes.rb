@@ -1,11 +1,19 @@
 Rails.application.routes.draw do
+  get 'game_users/create'
+
+  get 'game_users/delete'
+
+  get 'game_users/update'
+
   get 'chat/message'
 
   # get 'game/start'
 
   # get 'game/end'
 
-  match ':controller(/:action(:/id))', :via => [:get, :post];
+  resources :games, :game_users
+
+  match ':controller(/:action(/:id))', :via => [:get, :post];
 
   devise_for :users
   get 'welcome/index'

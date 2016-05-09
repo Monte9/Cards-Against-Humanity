@@ -11,21 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160410002642) do
+ActiveRecord::Schema.define(version: 20160508225405) do
 
   create_table "cards", force: :cascade do |t|
     t.string   "text"
     t.boolean  "is_black"
-    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "pick_count"
+  end
+
+  create_table "game_black_cards", force: :cascade do |t|
+    t.integer "card_id"
+    t.integer "round_id"
+    t.integer "game_id"
   end
 
   create_table "game_cards", force: :cascade do |t|
     t.integer  "game_id"
     t.integer  "card_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "game_user_id"
   end
 
   create_table "game_users", force: :cascade do |t|
@@ -51,11 +58,19 @@ ActiveRecord::Schema.define(version: 20160410002642) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "round_cards", force: :cascade do |t|
+    t.string   "card_id"
+    t.string   "game_user_id"
+    t.string   "round_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "rounds", force: :cascade do |t|
     t.integer  "game_id"
-    t.integer  "card_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "game_card_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -79,17 +94,18 @@ ActiveRecord::Schema.define(version: 20160410002642) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "votes", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "card_id"
     t.integer  "round_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "round_card_id"
+    t.integer  "game_user_id"
   end
 
   create_table "winning_combos", force: :cascade do |t|
-    t.integer  "card_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "black_card_id"
+    t.integer  "white_card_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
 end
