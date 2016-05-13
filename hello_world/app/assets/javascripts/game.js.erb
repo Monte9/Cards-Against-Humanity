@@ -68,7 +68,7 @@ function populate_vote_cards() {
 		if (index == 0) {
 			voting_row_1.append(
 				'<div class="col-sm-2 white-card">' +
-		        '<span class="white-card-text">'+card.text+'</span>' +
+		        '<span class="white-card-text" id="'+card.id+'">'+card.text+'</span>' +
 		        '<br/>' +
 		        '<div class="vote-buttons">' +
 		        up_vote_button + 
@@ -78,7 +78,7 @@ function populate_vote_cards() {
 		} else {
 			voting_row_1.append(
 				'<div class="col-sm-2  col-sm-offset-1 white-card">' +
-		        '<span class="white-card-text">'+card.text+'</span>' +
+		        '<span class="white-card-text" id="'+card.id+'">'+card.text+'</span>' +
 		        '<br/>' +
 		        '<div class="vote-buttons">' +
 		        up_vote_button +
@@ -90,36 +90,16 @@ function populate_vote_cards() {
 }
 
 function populate_hand() {
-	var hand_row_1 = $('#hand-row-1');
-	var hand_row_2 = $('#hand-row-2');
-
+	var hand_column;
+	
 	GAME_STATE.hand.forEach(function(card, index){
-		var first_row = index % 2 == 0;
-		if (index == 0) {
-			hand_row_1.append(
-				'<div class="col-sm-2 white-card">'+
-                    '<span class="white-card-text" id="'+ card.id+'">'+ card.text +'</span>'+
-                 '</div>'
-			);
-		} else if (index == 1) {
-			hand_row_2.append(
-				'<div class="col-sm-2 white-card">'+
-                    '<span class="white-card-text" id="'+ card.id+'">'+ card.text +'</span>'+
-                 '</div>'
-			);
-		} else if (first_row) {
-			hand_row_1.append(
-				'<div class="col-sm-2 col-sm-offset-1 white-card">'+
-                    '<span class="white-card-text" id="'+ card.id+'">'+ card.text +'</span>'+
-                 '</div>'
-			);
-		} else {
-			hand_row_2.append(
-				'<div class="col-sm-2 col-sm-offset-1 white-card">'+
-                    '<span class="white-card-text" id="'+ card.id+'">'+ card.text +'</span>'+
-                 '</div>'
-			);
-		}
+		var column_num = index % 4;
+		hand_column = $('#hand-col-'+ column_num);
+		hand_column.append(
+			'<div class="white-card">'+
+                '<span class="white-card-text" id="'+ card.id+'">'+ card.text +'</span>'+
+             '</div>'
+		);
 	});
 }
 
@@ -149,7 +129,15 @@ $(document).ready(function() {
 
 
 	$('#hand').on('click', '.white-card', function() {
-		
+		var voting_row_2 = $('#voting-row-2');
+		var card_text = $(this).children().first().text();
+		voting_row_2.append(
+				'<div class="col-sm-2 white-card">' +
+		        '<span class="white-card-text">'+card_text+'</span>' +
+		        '</div>'
+		        );
+		$(this).hide();
+		$('#hand').off('click', '.white-card');
 	});
 
     var pusher = new Pusher('0453f37d99fca4cb4e22', {
