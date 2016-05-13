@@ -1,5 +1,6 @@
 var GAME_STATE = {
 	gameID: 1,
+	round_id: 1,
 	player_list: [
 		{email:"iain" ,score: 10},
 		{email:"player1" ,score: 14},
@@ -70,7 +71,7 @@ function populate_vote_cards() {
 				'<div class="col-sm-2 white-card">' +
 		        '<span class="white-card-text" id="'+card.id+'">'+card.text+'</span>' +
 		        '<br/>' +
-		        '<div class="vote-buttons">' +
+		        '<div class="vote-buttons" id="'+card.id+'">' +
 		        up_vote_button + 
 		        '</div>' +
 		        '</div>'
@@ -80,7 +81,7 @@ function populate_vote_cards() {
 				'<div class="col-sm-2  col-sm-offset-1 white-card">' +
 		        '<span class="white-card-text" id="'+card.id+'">'+card.text+'</span>' +
 		        '<br/>' +
-		        '<div class="vote-buttons">' +
+		        '<div class="vote-buttons" id="'+card.id+'">' +
 		        up_vote_button +
 		        '</div>' +
 		        '</div>'
@@ -124,16 +125,26 @@ $(document).ready(function() {
 
 	$('#voting-row-1').on('click', '.up-vote', function() {
     	GAME_STATE.has_voted = true;
+    	var card_id = $(this).parent().attr('id');
+ 
+    	//$.get('/vote/create?game_id="'+GAME_STATE.gameID+'"&round_id="'+GAME_STATE.round_id+'"&card_round_id="'+card_id+'"');
+
     	$('button').remove('.up-vote');
 	});
 
 
 	$('#hand').on('click', '.white-card', function() {
 		var voting_row_2 = $('#voting-row-2');
-		var card_text = $(this).children().first().text();
+		var card = $(this).children().first();
+		var card_text = card.text();
+		var card_id = card.attr('id');
+
+		//add $.get() method hear to let game engine know 
+		//that the user has selected a card to be voted on
+
 		voting_row_2.append(
 				'<div class="col-sm-2 white-card">' +
-		        '<span class="white-card-text">'+card_text+'</span>' +
+		        '<span class="white-card-text" id="'+ card_id+'">'+card_text+'</span>' +
 		        '</div>'
 		        );
 		$(this).hide();
