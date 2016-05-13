@@ -3,13 +3,28 @@
 class Round < ActiveRecord::Base
 
 	belongs_to :game
-	has_one :game_black_card
+	has_many :game_black_cards
 	has_many :round_cards
 	has_many :votes
 	has_many :game_users, through: :game
 
-	after_create :request_black_card
+	after_commit :request_black_cards
 	before_destroy :update_score
+
+	def request_black_cards
+		GameBlackCard.assign_to_round game.id, id
+	end
+
+
+
+	def get_vote_tally 
+		tally = Hash.new 
+   		round_cards.find_each do |card|
+   			tally[card.id] = card.votes.count
+   		end
+   		return tally 
+   	end
+
 
 	def all_votes_in?
 		votes.count == game_users.count
@@ -28,23 +43,11 @@ class Round < ActiveRecord::Base
 
 	
 	def get_winner
-		tally = Hash.new
-		round_cards.each {|card|
-			tally[card.game_card_id]  = 0
-		}
-		puts tally
-		votes = Vote.where("round_id = ?", id)
-		votes.each{ |vote|
-			tally[vote.game_card_id.to_s] +=1 
-			puts vote.game_card_id			
-		}
-		puts tally
-
+		tally = get_vote_tally
 		result = tally.max_by{|k,v| v}
-		puts result	
-		@winner_game_user ||= (round_cards.find_by_game_card_id result[0].to_i).game_user_id
-		puts @winnner_game_user
-		@votes ||=  result[1]
+		@winner_card = RoundCard.find result[0] unless result.nil?
+		@round_winner ||= GameUser.find @winner_card.game_user_id unless result.nil?
+
 	end
 
 
@@ -56,16 +59,6 @@ class Round < ActiveRecord::Base
 
 	
 
-	def request_black_card
-		black_cards  = GameBlackCard.where("game_id = ? AND round_id = ?", game_id, -1)
-		black_cards.each do |black_card|
-			if black_card.card.pick_count < num_cards_left
-				blk_card = black_card
-				break
-			end
-		end
-		black_card.update(round_id: id)
-	end
 
 	def num_cards_left
 		gu_id = game_users[0].id
