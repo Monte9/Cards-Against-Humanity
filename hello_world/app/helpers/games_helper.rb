@@ -48,7 +48,7 @@ module GamesHelper
 		gs['score_board'] = complile_score_board players
 		
 		gs['black_cards'] = complile_card_list round.game_black_cards
-		gs['hand'] = complile_card_list game_user.get_hand
+		gs['hand'] = complile_card_list game_user.hand
 		gs['round_cards'] = complile_card_list round.round_cards
 		gs['votes']  = round.get_vote_tally
 		gs['winner'] = round.get_winner

@@ -17,6 +17,8 @@ class Game < ActiveRecord::Base
 		GameUser.create(game_id: id, user_id: current_user_id)
 	end
 
+	
+
 
 	def current_round
 		Round.where("game_id = ?", id).order("created_at").last

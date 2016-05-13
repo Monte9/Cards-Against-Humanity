@@ -26,7 +26,7 @@ def new
   game = Game.create
   game.setup current_user.id
   gs = GamesHelper.generateState game.id, current_user.id
-  render :json => gs
+  render 'start'
 end
 
 

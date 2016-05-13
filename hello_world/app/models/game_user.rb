@@ -11,10 +11,7 @@ class GameUser < ActiveRecord::Base
 			user.username
 		end
 	end
-
-
-
-
+	
 	def add_to_score amt
 		self.update(score: score+=amt)
 	end
