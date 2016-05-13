@@ -1,0 +1,12 @@
+Removed column 'user_id' from card model.
+Added column 'pick_count' to card model because black card have another attribute called 
+how many to pick.
+However, as currently we are storing both white and black card in the same table, 'pick_count'
+attribute will remain null for white cards. Perhaps we need to split black and white cards into 
+seperate tables.
+
+
+
+Add column to Game
+#TODO
+Remove duplicate tables gameuser game_user
