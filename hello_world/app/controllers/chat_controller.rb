@@ -1,11 +1,11 @@
+
 class ChatController < ApplicationController
   
 skip_before_filter  :verify_authenticity_token
 
   def message
 
-	gameId = params[:gameID]
-  	
+    gameId = params[:gameID]
   	message = params[:message]
   	user = current_user.email
   	timestamp = Time.now().to_s(:time)
@@ -15,7 +15,9 @@ skip_before_filter  :verify_authenticity_token
   	Pusher.trigger( game, 'message_sent', {
       message: message,
       user: user,
-      timestamp: timestamp
+      timestamp: timestamp,
+      has: has 
+
     })
   end
 end

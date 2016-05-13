@@ -52,8 +52,23 @@ module GamesHelper
 		gs['round_cards'] = complile_card_list round.round_cards
 		gs['votes']  = round.get_vote_tally
 		gs['winner'] = round.get_winner
-		gs.to_json
+		push gs
 	end
+
+
+	def self.push game_state
+		gs_json = game_state.to_json
+		game = "game_#{game_state['id']}"
+		timestamp = Time.now().to_s(:time)	
+		Pusher.trigger( game, 'status_update', {
+      	game_state: gs_json,
+     	timestamp: timestamp
+    })
+
+	end
+
+
+	
 
 
 	def self.complile_score_board players

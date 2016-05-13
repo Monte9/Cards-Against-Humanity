@@ -158,8 +158,11 @@ $(document).ready(function() {
     var channel = pusher.subscribe('game_1');
     channel.bind('message_sent', function(data) {
       	$('#chat').append('<span class="user">' + data.user + ' @ </span><span class="timestamp"> ' + data.timestamp + ' </span> <br /><span class="message" style="color:red; float: right">' + data.message + '</span><br />')
+
+
     });
 
+    
     display_game_id();
     show_black_card();
     populate_scoreboard();
