@@ -54,32 +54,32 @@
 
 <section id="grid" >
   <div class="container">
+    
     <div class="row text-center header animate-in" data-anim-type="fade-in-up">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <h3><%= link_to "Create Game", controller: "games", action: "create" %></h3>
+        <h3><%= link_to "Create Game", controller: "games", action: "new" %></h3>
         <hr />
         <h3>Open Games</h3>
       </div>
     </div>
+    
     <div class="row pad-bottom animate-in" data-anim-type="fade-in-up">
-          <% i = @games_players.size+1 %>
-        	<% @games_players.each_pair do |game_id, players| %>
-        	 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                <% i-=1 %>
-             		<h2>Open Game <%= i %></h2>
-                <ul> 
-        			<li><%= game_id%></li>
+      <% @records.each_pair do |game_id, players| %>
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+          <h2>Open Game</h2>
+          <ul> 
+        	   <li><%= game_id%></li>
         			<% players.each do |player| %>
-                <li><%= player%></li>
+              <li><%= player%></li>
               <% end %>
-        			<%= link_to "Join", {controller: "game_user", action: "create", id: game.id},
+        	<%= link_to "Join", {controller: "game_user", action: "create", id: game_id},
         			{class: "btn button-custom btn-custom-two" } %>
-                </ul>
-              </div>
-        	   <% end %>
-    </div>
+          </ul>
+        </div>
+      <% end %>
     </div>
   </div>
+  </div><!--container section END-->
 </section>
 <!--GRID SECTION END-->
 

@@ -1,0 +1,36 @@
+<td><%= game.updated_at %></td>
+		<td><%= link_to "Remove", game, action: "delete" %></td>
+		<td><a href="/game_user/create" class="join-game" data-game-id="<%= game.id %>" data-user-id="<%= current_user.id %>">Join</a></td>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HelloWorld</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+
+
+<% unless current_user.nil?  %>
+<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+<%= link_to 'Create Game',controller:"games", action:"create", :remote => true, :class => 'delete_game', id: current_user.id%>
+<%= link_to "join", controller: "GameUsers", action: "create"%>
+<% else %>
+	<%= link_to "Sign Up", new_user_registration_path %>
+	<%= link_to "Sign In", new_user_session_path %>	
+<% end %>
+<break>
+
+<%= link_to "GameUsers", controller: "game_users", action: "index" %>
+<%= yield %>
+
+</body>
+</html>

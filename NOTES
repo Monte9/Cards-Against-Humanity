@@ -1,0 +1,40 @@
+NOTES
+
+May be we dont need roundCard. Put round_id in game_card
+
+Game ends when either the all cards are done or the num players is less than 3.
+
+Generate model for black Game Cards because they have completely different data. 
+
+We check if the game is still in progress. 
+What happens aft
+er a round ends. We create a new round if the num of players is still greater than 3. 
+
+
++var GAME_STATE = {
+ +	gameID: 1,
+ +	player_list: [
+ +		{email:"iain" ,score: 10},
+ +		{email:"player1" ,score: 14},
+ +		{email:"player2" ,score: 9},
+ +		{email:"player3" ,score: 4}
+ +	],
+ +	black_card: {id:10, text:"__________: kid tested, mother-approved."},
+ +	hand: [
+ +		{id:1, text:"Being on fire."},
+ +		{id:2, text:"Racism."},
+ +		{id:3, text:"Old-people smell."},
+ +		{id:4, text:"A micro&shy;penis."},
+ +		{id:5, text:"Women in yo&shy;gurt com&shy;mercials."},
+ +		{id:6, text:"Classit under&shy;tones."},
+ +		{id:7, text:"Not giving a shit about the Third World."},
+ +		{id:8, text:"Inserting a mason jar into my anus."}
+ +	],
+ +	vote_cards: [
+ +		{id:1, text:"Being on fire."},
+ +		{id:2, text:"Racism."},
+ +		{id:3, text:"Old-people smell."},
+ +		{id:4, text:"A micro&shy;penis."},
+ +	],
+ +}
+ +

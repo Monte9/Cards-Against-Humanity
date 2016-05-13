@@ -2,18 +2,18 @@
 #t.integer  "user_id"
 #t.float    "score"
 class GameUser < ActiveRecord::Base
-	belongs_to :user, :class_name=>"User", :foreign_key=>"user_id"
-	belongs_to :game, :class_name=>"Game", :foreign_key=>"game_id"
+	belongs_to :user
+	belongs_to :game
 	has_many :rounds, through: :game
-	after_create :request_game_start
-
 
 	def username 
 		unless self.user_id.nil?
-			user = User.find_by id: self.user_id
-			user.username unless user.nil?
+			user.username
 		end
 	end
+
+
+
 
 	def add_to_score amt
 		self.update(score: score+=amt)
@@ -24,5 +24,13 @@ class GameUser < ActiveRecord::Base
 		if num_game_user >= Rails.application.config.PLAYER_THRESOLD
 			game.start g_id
 		end
+	end
+
+	def hand 
+		game_cards = GameCard.where("game_user_id = ?", id)
+		cards_h = Hash.new
+		game_cards.each { |g_card|
+			cards_h['id'] = [g_card.card.text]
+		}
 	end
 end
