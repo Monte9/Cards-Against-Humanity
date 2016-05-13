@@ -1,12 +1,13 @@
 var GAME_STATE = {
 	gameID: 1,
+	round_id: 1,
 	player_list: [
 		{email:"iain" ,score: 10},
 		{email:"player1" ,score: 14},
 		{email:"player2" ,score: 9},
 		{email:"player3" ,score: 4}
 	],
-	black_card: {id:10, text:"__________: kid tested, mother-approved."},
+	black_card: {id:10, text:"kid tested, mother-approved."},
 	hand: [
 		{id:1, text:"Being on fire."},
 		{id:2, text:"Racism."},
@@ -23,10 +24,11 @@ var GAME_STATE = {
 		{id:3, text:"Old-people smell."},
 		{id:4, text:"A micro&shy;penis."},
 	],
+	has_voted: false,
 }
 
 var count=30;
-var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+var counter=setInterval(timer, 1000); //1000 will run it every 1 second
 
 function timer() {
   count=count-1;
@@ -41,12 +43,10 @@ function display_game_id() {
 	$('#game-id').append(GAME_STATE.gameID);
 }
 
-
 function show_black_card(){
-	$('#black-card').html(GAME_STATE.black_card.text)
+	$('#black-card').html("__________: " + GAME_STATE.black_card.text)
 					.data("card-id", GAME_STATE.black_card.id);
 }
-
 
 function populate_scoreboard(){
 	var scoreboard = $('#scoreboard');
@@ -62,26 +62,27 @@ function populate_scoreboard(){
 function populate_vote_cards() {
 	var voting_row_1 = $('#voting-row-1');
 
+	var up_vote_button = GAME_STATE.has_voted ? '' : '<button class="btn btn-default up-vote"><%= image_tag "Thumb-Up.png", height: "20" %></button>';
+
+
 	GAME_STATE.vote_cards.forEach(function(card, index){
 		if (index == 0) {
 			voting_row_1.append(
 				'<div class="col-sm-2 white-card">' +
-		        '<span class="white-card-text">'+card.text+'</span>' +
+		        '<span class="white-card-text" id="'+card.id+'">'+card.text+'</span>' +
 		        '<br/>' +
-		        '<div class="vote-buttons">' +
-		        '<button class="btn btn-default down-vote"><%= image_tag "Thumb-Down.png", height: "20" %></button>' +
-		        '<button class="btn btn-default up-vote"><%= image_tag "Thumb-Up.png", height: "20" %></button>' +
+		        '<div class="vote-buttons" id="'+card.id+'">' +
+		        up_vote_button + 
 		        '</div>' +
 		        '</div>'
 			);
 		} else {
 			voting_row_1.append(
 				'<div class="col-sm-2  col-sm-offset-1 white-card">' +
-		        '<span class="white-card-text">'+card.text+'</span>' +
+		        '<span class="white-card-text" id="'+card.id+'">'+card.text+'</span>' +
 		        '<br/>' +
-		        '<div class="vote-buttons">' +
-		        '<button class="btn btn-default down-vote"><%= image_tag "Thumb-Down.png", height: "20" %></button>' +
-		        '<button class="btn btn-default up-vote"><%= image_tag "Thumb-Up.png", height: "20" %></button>' +
+		        '<div class="vote-buttons" id="'+card.id+'">' +
+		        up_vote_button +
 		        '</div>' +
 		        '</div>'
 			);
@@ -90,36 +91,16 @@ function populate_vote_cards() {
 }
 
 function populate_hand() {
-	var hand_row_1 = $('#hand-row-1');
-	var hand_row_2 = $('#hand-row-2');
-
+	var hand_column;
+	
 	GAME_STATE.hand.forEach(function(card, index){
-		var first_row = index % 2 == 0;
-		if (index == 0) {
-			hand_row_1.append(
-				'<div class="col-sm-2 white-card">'+
-                    '<span class="white-card-text" id="'+ card.id+'">'+ card.text +'</span>'+
-                 '</div>'
-			);
-		} else if (index == 1) {
-			hand_row_2.append(
-				'<div class="col-sm-2 white-card">'+
-                    '<span class="white-card-text" id="'+ card.id+'">'+ card.text +'</span>'+
-                 '</div>'
-			);
-		} else if (first_row) {
-			hand_row_1.append(
-				'<div class="col-sm-2 col-sm-offset-1 white-card">'+
-                    '<span class="white-card-text" id="'+ card.id+'">'+ card.text +'</span>'+
-                 '</div>'
-			);
-		} else {
-			hand_row_2.append(
-				'<div class="col-sm-2 col-sm-offset-1 white-card">'+
-                    '<span class="white-card-text" id="'+ card.id+'">'+ card.text +'</span>'+
-                 '</div>'
-			);
-		}
+		var column_num = index % 4;
+		hand_column = $('#hand-col-'+ column_num);
+		hand_column.append(
+			'<div class="white-card">'+
+                '<span class="white-card-text" id="'+ card.id+'">'+ card.text +'</span>'+
+             '</div>'
+		);
 	});
 }
 
@@ -139,7 +120,35 @@ $(document).ready(function() {
 				$('#chatbox').val("");
 				console.log("Made post request");
 			});
-		}
+		}	
+	});
+
+	$('#voting-row-1').on('click', '.up-vote', function() {
+    	GAME_STATE.has_voted = true;
+    	var card_id = $(this).parent().attr('id');
+ 
+    	//$.get('/vote/create?game_id="'+GAME_STATE.gameID+'"&round_id="'+GAME_STATE.round_id+'"&card_round_id="'+card_id+'"');
+
+    	$('button').remove('.up-vote');
+	});
+
+
+	$('#hand').on('click', '.white-card', function() {
+		var voting_row_2 = $('#voting-row-2');
+		var card = $(this).children().first();
+		var card_text = card.text();
+		var card_id = card.attr('id');
+
+		//add $.get() method hear to let game engine know 
+		//that the user has selected a card to be voted on
+
+		voting_row_2.append(
+				'<div class="col-sm-2 white-card">' +
+		        '<span class="white-card-text" id="'+ card_id+'">'+card_text+'</span>' +
+		        '</div>'
+		        );
+		$(this).hide();
+		$('#hand').off('click', '.white-card');
 	});
 
     var pusher = new Pusher('0453f37d99fca4cb4e22', {
@@ -150,7 +159,6 @@ $(document).ready(function() {
     channel.bind('message_sent', function(data) {
       	$('#chat').append('<span class="user">' + data.user + ' @ </span><span class="timestamp"> ' + data.timestamp + ' </span> <br /><span class="message" style="color:red; float: right">' + data.message + '</span><br />')
     });
-
 
     display_game_id();
     show_black_card();

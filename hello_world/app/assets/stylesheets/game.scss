@@ -23,8 +23,9 @@
     padding-right: 2px;
     float: right;
 }
-#voting-cards {
-    overflow-y: scroll;
+div#voting-cards {
+    max-height: 300px;
+    overflow: scroll;
 }
 
 #table {
@@ -65,7 +66,7 @@ div.white-card {
     background-color: #fff;
     min-height: 100px;
     border-radius: 10px;
-    padding-top: 10px;
+    padding: 10px;
     margin-bottom:2px;
     padding-bottom: 30px;
 }
@@ -98,6 +99,10 @@ span.white-card-text {
     overflow-y: scroll;
     max-height: 200px;
     padding-right: 20px;
+}
+
+div#hand-row-1 div {
+    padding-right: 0px;
 }
 
 div#hand div.row {
