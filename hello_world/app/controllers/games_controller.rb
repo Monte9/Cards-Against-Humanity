@@ -23,9 +23,14 @@ def new
     redirect_to :controller => 'users', :action => 'sign_in'  
     return
   end 
-  game = Game.create
-  game.setup current_user.id
-  gs = GamesHelper.generateState game.id, current_user.id
+  @game = Game.create
+  @game.setup current_user.id
+  redirect_to :action => "show", :id=> @game.id
+  #gs = GamesHelper.generateState game.id, current_user.id
+end
+
+def show
+  @game = Game.find params[:id]
   render 'start'
 end
 

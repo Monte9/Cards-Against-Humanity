@@ -50,7 +50,7 @@
 
 <!--GRID SECTION START-->
 
-	
+  
 
 <section id="grid" >
   <div class="container">
@@ -68,12 +68,12 @@
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
           <h2>Open Game</h2>
           <ul> 
-        	   <li><%= game_id%></li>
-        			<% players.each do |player| %>
+             <li><%= game_id%></li>
+              <% players.each do |player| %>
               <li><%= player%></li>
               <% end %>
-        	<%= link_to "Join", {controller: "game_user", action: "create", id: game_id},
-        			{class: "btn button-custom btn-custom-two" } %>
+          <%= link_to "Join", {controller: "game_user", action: "create", id: game_id},
+              {class: "btn button-custom btn-custom-two" } %>
           </ul>
         </div>
       <% end %>
@@ -82,18 +82,3 @@
   </div><!--container section END-->
 </section>
 <!--GRID SECTION END-->
-
-<script>
-$(document).ready( function() {
-	$('a.join-game').on( 'click', function(event) {
-		event.stopPropagation();
-
-		var gameId = $(this).data('game-id');
-		var userId = $(this).data( 'user-id' );
-
-		$.post( $(this).attr('href'), { user_id: userId, game_id: gameId }, function(result) {
-			
-		});
-	});
-});
-</script>

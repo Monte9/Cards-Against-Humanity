@@ -114,7 +114,7 @@ $(document).ready(function() {
 			console.log(value);
 
 			var URI = '/chat/message';
-			var payload = {message: value, gameID: '1'};
+			var payload = {message: value, gameID: game_id};
 
 			$.post(URI, payload, function() {
 				$('#chatbox').val("");
@@ -155,7 +155,8 @@ $(document).ready(function() {
       encrypted: true
     });
 
-    var channel = pusher.subscribe('game_1');
+    var chn_name = 'game_'.concat(game_id);
+    var channel = pusher.subscribe(chn_name);
     channel.bind('message_sent', function(data) {
       	$('#chat').append('<span class="user">' + data.user + ' @ </span><span class="timestamp"> ' + data.timestamp + ' </span> <br /><span class="message" style="color:red; float: right">' + data.message + '</span><br />')
 
@@ -171,6 +172,3 @@ $(document).ready(function() {
 	timer();
 
 });
-
-
-

@@ -1,11 +1,13 @@
+<script type="text/javascript">  
+  var game_id = <%= @game.id%>;  
+</script>  
 <header>
   <%= render 'layouts/application' %>
   <%= render 'layouts/menu' %>
 </header>
-
 <div id="chat-wrapper">
 	<div class="container">
-		<h4 id="game-id">Game </h4>
+		<h4 id="game-id"><% @game.id %> </h4>
     	<div class="row">
       		<div class="col-sm-10" id="table">
             <div class="row" id="playing-field">
@@ -63,4 +65,4 @@
 	</div>
 </div>
 
-<script src="https://js.pusher.com/3.0/pusher.min.js"></script>
+<div><h3>GameID: <%= @game.id%></h3>></div>>

@@ -16,8 +16,6 @@ skip_before_filter  :verify_authenticity_token
       message: message,
       user: user,
       timestamp: timestamp,
-      has: has 
-
     })
   end
 end

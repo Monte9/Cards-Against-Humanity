@@ -1,24 +1,27 @@
 Rails.application.routes.draw do
-  get 'game_users/create'
+  #get 'game_users/create'
 
-  get 'game_users/delete'
+  #get 'game_users/delete'
 
-  get 'game_users/update'
+  #get 'game_users/update'
 
-  get 'chat/message'
+  #get 'chat/message'
+
+  #get '/games/:id', to: 'games#show'
+
 
   # get 'game/start'
 
   # get 'game/end'
 
-  resources :games, :game_users
+  #resources :games, :game_users
 
   match ':controller(/:action(/:id))', :via => [:get, :post];
 
   devise_for :users
   get 'welcome/index'
 
-  resources :game
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
