@@ -134,6 +134,11 @@ $(document).ready(function() {
 	});
 
 
+	$('#join_button').click(function(){
+		console.log('join_button');
+	});
+
+
 	$('#hand').on('click', '.white-card', function() {
 		var voting_row_2 = $('#voting-row-2');
 		var card = $(this).children().first();
