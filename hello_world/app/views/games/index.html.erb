@@ -72,7 +72,7 @@
               <% players.each do |player| %>
               <li><%= player%></li>
               <% end %>
-          <%= link_to "Join", {controller: "game_user", action: "create", id: game_id},
+          <%= link_to "Join", {controller: "game_users", action: "create", id: game_id},
               {class: "btn button-custom btn-custom-two" } %>
           </ul>
         </div>

@@ -59,6 +59,7 @@ module GamesHelper
 	def self.push game_state
 		puts "pushing game_state"
 		gs_json = game_state.to_json
+		puts gs_json
 		game = "game_#{game_state['id']}"
 		timestamp = Time.now().to_s(:time)	
 		Pusher.trigger( game, 'status_update', {

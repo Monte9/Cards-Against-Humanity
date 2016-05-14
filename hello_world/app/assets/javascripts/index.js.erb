@@ -1,4 +1,4 @@
-var GAME_STATE = {
+var current_game_state = {
 	gameID: 1,
 	round_id: 1,
 	player_list: [
@@ -40,17 +40,17 @@ function timer() {
 }
 
 function display_game_id() {
-	$('#game-id').append(GAME_STATE.gameID);
+	$('#game-id').append(current_game_state.gameID);
 }
 
 function show_black_card(){
-	$('#black-card').html("__________: " + GAME_STATE.black_card.text)
-					.data("card-id", GAME_STATE.black_card.id);
+	$('#black-card').html("__________: " + current_game_state.black_card.text)
+					.data("card-id", current_game_state.black_card.id);
 }
 
 function populate_scoreboard(){
 	var scoreboard = $('#scoreboard');
-	GAME_STATE.player_list.forEach(function(player){
+	current_game_state.player_list.forEach(function(player){
 		scoreboard.append(
 			'<tr>'+
             	'<th>'+ player.email +'</th><th>'+player.score+'</th>'+
@@ -62,10 +62,10 @@ function populate_scoreboard(){
 function populate_vote_cards() {
 	var voting_row_1 = $('#voting-row-1');
 
-	var up_vote_button = GAME_STATE.has_voted ? '' : '<button class="btn btn-default up-vote"><%= image_tag "Thumb-Up.png", height: "20" %></button>';
+	var up_vote_button = current_game_state.has_voted ? '' : '<button class="btn btn-default up-vote"><%= image_tag "Thumb-Up.png", height: "20" %></button>';
 
 
-	GAME_STATE.vote_cards.forEach(function(card, index){
+	current_game_state.vote_cards.forEach(function(card, index){
 		if (index == 0) {
 			voting_row_1.append(
 				'<div class="col-sm-2 white-card">' +
@@ -93,7 +93,7 @@ function populate_vote_cards() {
 function populate_hand() {
 	var hand_column;
 	
-	GAME_STATE.hand.forEach(function(card, index){
+	current_game_state.hand.forEach(function(card, index){
 		var column_num = index % 4;
 		hand_column = $('#hand-col-'+ column_num);
 		hand_column.append(
@@ -124,10 +124,11 @@ $(document).ready(function() {
 	});
 
 	$('#voting-row-1').on('click', '.up-vote', function() {
-    	GAME_STATE.has_voted = true;
+    	current_game_state.has_voted = true;
     	var card_id = $(this).parent().attr('id');
+
  
-    	//$.get('/vote/create?game_id="'+GAME_STATE.gameID+'"&round_id="'+GAME_STATE.round_id+'"&card_round_id="'+card_id+'"');
+    	$.get('/votes/create?game_id='+current_game_state.gameID+'&round_id='+current_game_state.round_id+'&card_round_id='+card_id+'');
 
     	$('button').remove('.up-vote');
 	});
@@ -155,12 +156,17 @@ $(document).ready(function() {
       encrypted: true
     });
 
-    var chn_name = 'game_'.concat(game_id);
+    var chn_name = 'game_'.concat(current_game_state.gameID);
     var channel = pusher.subscribe(chn_name);
     channel.bind('message_sent', function(data) {
       	$('#chat').append('<span class="user">' + data.user + ' @ </span><span class="timestamp"> ' + data.timestamp + ' </span> <br /><span class="message" style="color:red; float: right">' + data.message + '</span><br />')
 
 
+    });
+
+    var game_state_channel = pusher.subscribe(chn_name);
+    game_state_channel.bind('status_update', function(data) {
+    	console.log(data);
     });
 
     

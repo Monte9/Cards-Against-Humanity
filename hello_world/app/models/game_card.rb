@@ -20,7 +20,7 @@ class GameCard < ActiveRecord::Base
 		ActiveRecord::Base.transaction do
   			game_card = GameCard.limit(1).
   						where("game_user_id =? AND game_id = ?", -1, game_id)
-			raise error if game_card.nil?
+			raise RuntimeError if ( game_card.nil? || game_card.empty?) 
 			game_card.game_user_id = player_id
 			game_card.save
 		end

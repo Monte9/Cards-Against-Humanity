@@ -25,8 +25,10 @@ def new
   end 
   @game = Game.create
   @game.setup current_user.id
+  gs = GamesHelper.generateState @game.id, current_user.id
+  puts gs
   redirect_to :action => "show", :id=> @game.id
-  #gs = GamesHelper.generateState game.id, current_user.id
+  
 end
 
 def show
