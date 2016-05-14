@@ -135,7 +135,10 @@ $(document).ready(function() {
 
 
 	$('#join_button').click(function(){
-		console.log('join_button');
+		$.get( "game_users/create", { game_id: 1 } )
+  			.done(function( data ) {
+    			alert( "Data Loaded: " + data );
+ 		 });
 	});
 
 
