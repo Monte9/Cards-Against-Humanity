@@ -28,7 +28,7 @@ var current_game_state = {
 		{id:3, text:"Old-people smell."},
 		{id:4, text:"A micro&shy;penis."},
 	],
-	has_voted: false,
+	can_vote: false,
 }
 
 var count=30;
@@ -66,8 +66,9 @@ function populate_scoreboard(){
 function populate_vote_cards() {
 	var voting_row_1 = $('#voting-row-1');
 
-	var up_vote_button = current_game_state.has_voted ? '' : '<button class="btn btn-default up-vote"><%= image_tag "Thumb-Up.png", height: "20" %></button>';
+	var up_vote_button = current_game_state.can_vote ? '<button class="btn btn-default up-vote"><%= image_tag "Thumb-Up.png", height: "20" %></button>' : '';
 
+  voting_row_1.html("")
 
 	current_game_state.round_cards.forEach(function(card, index){
 		if (index == 0) {
@@ -132,7 +133,7 @@ $(document).ready(function() {
 	});
 
 	$('#voting-row-1').on('click', '.up-vote', function() {
-    	current_game_state.has_voted = true;
+    	current_game_state.can_vote = false;
     	var card_id = $(this).parent().attr('id');
 
  
@@ -162,13 +163,14 @@ $(document).ready(function() {
 
     $.post('/round_cards/create', {"game_card_id": card_id, "game_user_id": user_id,
       "round_id": current_game_state.round_id, game_id: current_game_state.id});
+
     //create?game_card_id=' + card.id + '&game_user_id=' + user_id + '&round_id=' + current_game_state.round_id);
 
-		voting_row_2.append(
-				'<div class="col-sm-2 white-card">' +
-		        '<span class="white-card-text" id="'+ card_id+'">'+card_text+'</span>' +
-		        '</div>'
-		        );
+//		voting_row_2.append(
+//				'<div class="col-sm-2 white-card">' +
+//		        '<span class="white-card-text" id="'+ card_id+'">'+card_text+'</span>' +
+//		        '</div>'
+//		        );
 		$(this).hide();
 		$('#hand').off('click', '.white-card');
 

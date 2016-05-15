@@ -55,7 +55,9 @@ class Round < ActiveRecord::Base
 
 
 	def update_score
-		@winner_game_user.add_to_score 10
+		if @winner_card != nil
+			@winner_game_user.add_to_score 10
+		end
 	end
 
 	
