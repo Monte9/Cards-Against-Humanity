@@ -1,3 +1,4 @@
+<<<<<<< HEAD
  var current_game_state = {
 	gameID: 1,
 	round_id: 1,
@@ -30,111 +31,165 @@ var game_id;
 if(gon){
 	game_id = gon.game_id
 	console.log(gon.game_id)}
-var count=30;
-var counter=setInterval(timer, 1000); //1000 will run it every 1 second
+
+//home page stuff
+var winning_combos = {
+  combos: [
+    {id: 1, black_card: "War!<br><br>What is it good for?", white_card: "Man meat"},
+    {
+      id: 2,
+      black_card: "After the earthquake, Sean Penn brought _ to the people of Haiti.",
+      white_card: "Michelle Obama's arms."
+    },
+    {
+      id: 3,
+      black_card: "When I am a billionaire, I shall erect a 50-foot statue to commemorate _.",
+      white_card: "Surprise sex!"
+    }
+  ]
+}
+
+
+function display_winning_combos() {
+
+  var winning_combo_carousel = $('#winning-combo-carousel');
+
+  winning_combos.combos.forEach(function (combo, index) {
+    if (index == 0) {
+      winning_combo_carousel.append(
+          '<div class="item active">' +
+          '<div class="col-sm-3 col-sm-offset-2">' +
+          '<div id="winning-black-card">' + combo.black_card + '</div>' +
+          '</div>' +
+          '<div class="col-sm-3 col-sm-offset-1">' +
+          '<div id="winning-white-card">' + '<span class="white-card-text">' + combo.white_card + '</span></div>' +
+          '</div>' +
+          '</div>'
+      );
+    }
+    else {
+      winning_combo_carousel.append(
+          '<div class="item">' +
+          '<div class="col-sm-3 col-sm-offset-2">' +
+          '<div id="winning-black-card">' + combo.black_card + '</div>' +
+          '</div>' +
+          '<div class="col-sm-3 col-sm-offset-1">' +
+          '<div id="winning-white-card">' + '<span class="white-card-text">' + combo.white_card + '</span></div>' +
+          '</div>' +
+          '</div>'
+      );
+    }
+
+  });
+}
+
+//end home page stuff
+
+var count = 30;
+var counter = setInterval(timer, 1000); //1000 will run it every 1 second
 
 function timer() {
-  count=count-1;
+  count = count - 1;
   if (count <= 0) {
-     clearInterval(counter);
-     return;
+    clearInterval(counter);
+    return;
   }
   $('#timer').html('00:' + count);
 }
 
 function display_game_id() {
-	$('#game-id').append(current_game_state.gameID);
+  $('#game-id').append(current_game_state.gameID);
 }
 
-function show_black_card(){
-	$('#black-card').html("__________: " + current_game_state.black_card.text)
-					.data("card-id", current_game_state.black_card.id);
+function show_black_card() {
+  $('#black-card').html("__________: " + current_game_state.black_card.text)
+      .data("card-id", current_game_state.black_card.id);
 }
 
-function populate_scoreboard(){
-	var scoreboard = $('#scoreboard');
-	current_game_state.player_list.forEach(function(player){
-		scoreboard.append(
-			'<tr>'+
-            	'<th>'+ player.email +'</th><th>'+player.score+'</th>'+
-            '</tr>'
-        );
-	});
+function populate_scoreboard() {
+  var scoreboard = $('#scoreboard');
+  current_game_state.player_list.forEach(function (player) {
+    scoreboard.append(
+        '<tr>' +
+        '<th>' + player.email + '</th><th>' + player.score + '</th>' +
+        '</tr>'
+    );
+  });
 }
 
 function populate_vote_cards() {
-	var voting_row_1 = $('#voting-row-1');
+  var voting_row_1 = $('#voting-row-1');
 
-	var up_vote_button = current_game_state.has_voted ? '' : '<button class="btn btn-default up-vote"><%= image_tag "Thumb-Up.png", height: "20" %></button>';
+  var up_vote_button = current_game_state.has_voted ? '' : '<button class="btn btn-default up-vote"><%= image_tag "Thumb-Up.png", height: "20" %></button>';
 
 
-	current_game_state.vote_cards.forEach(function(card, index){
-		if (index == 0) {
-			voting_row_1.append(
-				'<div class="col-sm-2 white-card">' +
-		        '<span class="white-card-text" id="'+card.id+'">'+card.text+'</span>' +
-		        '<br/>' +
-		        '<div class="vote-buttons" id="'+card.id+'">' +
-		        up_vote_button + 
-		        '</div>' +
-		        '</div>'
-			);
-		} else {
-			voting_row_1.append(
-				'<div class="col-sm-2  col-sm-offset-1 white-card">' +
-		        '<span class="white-card-text" id="'+card.id+'">'+card.text+'</span>' +
-		        '<br/>' +
-		        '<div class="vote-buttons" id="'+card.id+'">' +
-		        up_vote_button +
-		        '</div>' +
-		        '</div>'
-			);
-		}
-	});
+  current_game_state.vote_cards.forEach(function (card, index) {
+    if (index == 0) {
+      voting_row_1.append(
+          '<div class="col-sm-2 white-card">' +
+          '<span class="white-card-text" id="' + card.id + '">' + card.text + '</span>' +
+          '<br/>' +
+          '<div class="vote-buttons" id="' + card.id + '">' +
+          up_vote_button +
+          '</div>' +
+          '</div>'
+      );
+    } else {
+      voting_row_1.append(
+          '<div class="col-sm-2  col-sm-offset-1 white-card">' +
+          '<span class="white-card-text" id="' + card.id + '">' + card.text + '</span>' +
+          '<br/>' +
+          '<div class="vote-buttons" id="' + card.id + '">' +
+          up_vote_button +
+          '</div>' +
+          '</div>'
+      );
+    }
+  });
 }
 
 function populate_hand() {
-	var hand_column;
-	
-	current_game_state.hand.forEach(function(card, index){
-		var column_num = index % 4;
-		hand_column = $('#hand-col-'+ column_num);
-		hand_column.append(
-			'<div class="white-card">'+
-                '<span class="white-card-text" id="'+ card.id+'">'+ card.text +'</span>'+
-             '</div>'
-		);
-	});
+  var hand_column;
+
+  current_game_state.hand.forEach(function (card, index) {
+    var column_num = index % 4;
+    hand_column = $('#hand-col-' + column_num);
+    hand_column.append(
+        '<div class="white-card">' +
+        '<span class="white-card-text" id="' + card.id + '">' + card.text + '</span>' +
+        '</div>'
+    );
+  });
 }
 
-$(document).ready(function() {
-	console.log('Loaded DOM');
-	$('#sendChat').click(function() {
-		var value = $('#chatbox').val();
-		if( !value) {
-			console.log("You f'ed up");
-		} else {
-			console.log(value);
+$(document).ready(function () {
+  console.log('Loaded DOM');
+  $('#sendChat').click(function () {
+    var value = $('#chatbox').val();
+    if (!value) {
+      console.log("You f'ed up");
+    } else {
+      console.log(value);
 
-			var URI = '/chat/message';
-			var payload = {message: value, gameID: game_id};
+      var URI = '/chat/message';
+      var payload = {message: value, gameID: game_id};
 
-			$.post(URI, payload, function() {
-				$('#chatbox').val("");
-				console.log("Made post request");
-			});
-		}	
-	});
+      $.post(URI, payload, function () {
+        $('#chatbox').val("");
+        console.log("Made post request");
+      });
+    }
+  });
 
-	$('#voting-row-1').on('click', '.up-vote', function() {
-    	current_game_state.has_voted = true;
-    	var card_id = $(this).parent().attr('id');
+  $('#voting-row-1').on('click', '.up-vote', function () {
+    current_game_state.has_voted = true;
+    var card_id = $(this).parent().attr('id');
 
- 
-    	$.get('/votes/create?game_id='+current_game_state.gameID+'&round_id='+current_game_state.round_id+'&card_round_id='+card_id+'');
 
-    	$('button').remove('.up-vote');
-	});
+    $.get('/votes/create?game_id=' + current_game_state.gameID + '&round_id=' + current_game_state.round_id + '&card_round_id=' + card_id + '');
+
+    $('button').remove('.up-vote');
+  });
 
 
 	$('.join_button').click(function(){
@@ -152,41 +207,41 @@ $(document).ready(function() {
 		var card_text = card.text();
 		var card_id = card.attr('id');
 
-		//add $.get() method hear to let game engine know 
-		//that the user has selected a card to be voted on
+    //add $.get() method hear to let game engine know
+    //that the user has selected a card to be voted on
 
-		voting_row_2.append(
-				'<div class="col-sm-2 white-card">' +
-		        '<span class="white-card-text" id="'+ card_id+'">'+card_text+'</span>' +
-		        '</div>'
-		        );
-		$(this).hide();
-		$('#hand').off('click', '.white-card');
-	});
+    voting_row_2.append(
+        '<div class="col-sm-2 white-card">' +
+        '<span class="white-card-text" id="' + card_id + '">' + card_text + '</span>' +
+        '</div>'
+    );
+    $(this).hide();
+    $('#hand').off('click', '.white-card');
+  });
 
-    var pusher = new Pusher('0453f37d99fca4cb4e22', {
-      encrypted: true
-    });
+  var pusher = new Pusher('0453f37d99fca4cb4e22', {
+    encrypted: true
+  });
 
-    var chn_name = 'game_'.concat(current_game_state.gameID);
-    var channel = pusher.subscribe(chn_name);
-    channel.bind('message_sent', function(data) {
-      	$('#chat').append('<span class="user">' + data.user + ' @ </span><span class="timestamp"> ' + data.timestamp + ' </span> <br /><span class="message" style="color:red; float: right">' + data.message + '</span><br />')
+  var chn_name = 'game_'.concat(current_game_state.gameID);
+  var channel = pusher.subscribe(chn_name);
+  channel.bind('message_sent', function (data) {
+    $('#chat').append('<span class="user">' + data.user + ' @ </span><span class="timestamp"> ' + data.timestamp + ' </span> <br /><span class="message" style="color:red; float: right">' + data.message + '</span><br />')
 
 
-    });
+  });
 
-    var game_state_channel = pusher.subscribe(chn_name);
-    game_state_channel.bind('status_update', function(data) {
-    	console.log(data);
-    });
+  var game_state_channel = pusher.subscribe(chn_name);
+  game_state_channel.bind('status_update', function (data) {
+    console.log(data);
+  });
 
-    
-    display_game_id();
-    show_black_card();
-    populate_scoreboard();
-    populate_vote_cards();
-    populate_hand();
-	timer();
+  display_winning_combos();
+  display_game_id();
+  show_black_card();
+  populate_scoreboard();
+  populate_vote_cards();
+  populate_hand();
+  timer();
 
 });
