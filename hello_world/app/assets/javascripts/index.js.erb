@@ -175,7 +175,7 @@ $(document).ready(function() {
 
     var game_state_channel = pusher.subscribe(chn_name);
     game_state_channel.bind('status_update', function(data) {
-    	console.log(data);
+    	console.log(data.game_state);
     });
 
     

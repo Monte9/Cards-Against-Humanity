@@ -17,15 +17,14 @@ class Game < ActiveRecord::Base
 		GameUser.create(game_id: id, user_id: current_user_id)
 	end
 
-	
-
 
 	def current_round
 		Round.where("game_id = ?", id).order("created_at").last
 	end
 	
 	def open?
-		return self.game_users.all.size <  Rails::Application.config.MAX_PLAYERS
+		return self.game_users.all.size <  HelloWorld::Application.config.MAX_PLAYERS
+	end
 
 	def player_count
 		return game_users.count
@@ -37,7 +36,6 @@ class Game < ActiveRecord::Base
 			return false
 		end 
 		return self.game_users.count < Rails::Application.config.PLAYER_THRESOLD
-		
 	end
 
 	def should_start?
@@ -57,6 +55,4 @@ class Game < ActiveRecord::Base
 	def add_game_user user_id
 		GameUser.create(user_id: user_id, game_id: id)	
 	end
-
-	
 end
