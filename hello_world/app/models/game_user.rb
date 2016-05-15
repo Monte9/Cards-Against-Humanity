@@ -23,11 +23,12 @@ class GameUser < ActiveRecord::Base
 		end
 	end
 
-	def hand 
-		game_cards = GameCard.where("game_user_id = ?", id)
-		cards_h = Hash.new
-		game_cards.each { |g_card|
-			cards_h['id'] = [g_card.card.text]
-		}
+	def hand game_id
+		game_cards = GameCard.where("game_id = ? AND game_user_id != -1", game_id)
+		# cards_h = Hash.new
+		# game_cards.each { |g_card|
+		# 	cards_h['id'] = [g_card.card.text]
+		# }
+		# cards_h
 	end
 end

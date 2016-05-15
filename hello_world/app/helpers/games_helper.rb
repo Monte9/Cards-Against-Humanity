@@ -36,8 +36,7 @@ module GamesHelper
 	
 	def self.update_state game_id, current_user_id
 		game = Game.find game_id
-		game_user = GameUser.
-			where("game_id= ? AND user_id=?",game_id,current_user_id).first
+		game_user = GameUser.where("game_id= ? AND user_id=?", game_id, current_user_id).first
 		round = game.current_round
 		gs = Hash.new
 		gs['id'] = game.id 
@@ -48,7 +47,7 @@ module GamesHelper
 		
 		
 		gs['black_cards'] = compile_card_list round.game_black_cards
-		gs['hand'] = compile_card_list game_user.hand
+		gs['hand'] = compile_card_list game_user.hand(game.id)
 		gs['round_cards'] = compile_card_list round.round_cards
 		gs['votes']  = round.get_vote_tally
 		
@@ -110,9 +109,15 @@ module GamesHelper
 
 	def self.compile_card_list game_cards
 		card_list  = []
+
 		game_cards.each do |game_card|
+
+			card_user_id = game_card.game_user_id if !game_card.instance_of? GameBlackCard
+
 			card_list << {'id' => game_card.id,
-				'text' => game_card.card.text}
+				'text' => game_card.card.text,
+				'card_user_id' => card_user_id}
+
 		end
 		return card_list
 	end

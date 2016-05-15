@@ -41,4 +41,9 @@ def delete
   Game.delete(params[:game_id])
 end
 
+def game_state 
+  GamesHelper.update_state params[:game_id], params[:game_user_id]
+  render nothing: true
+end
+
 end

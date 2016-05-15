@@ -1,34 +1,33 @@
-var user_id = <%= @current_user.__id__ %>
 
 var current_game_state = {
-	id: 1,
-	round_id: 1,
-	score_board: [
-		{username:"iain" ,score: 10},
-		{username:"player1" ,score: 14},
-		{username:"player2" ,score: 9},
-		{username:"player3" ,score: 4}
-	],
-	black_card: [
-    {id:10, text:"kid tested, mother-approved."}
-      ],
-	hand: [
-		{id:1, text:"Being on fire."},
-		{id:2, text:"Racism."},
-		{id:3, text:"Old-people smell."},
-		{id:4, text:"A micro&shy;penis."},
-		{id:5, text:"Women in yo&shy;gurt com&shy;mercials."},
-		{id:6, text:"Classit under&shy;tones."},
-		{id:7, text:"Not giving a shit about the Third World."},
-		{id:8, text:"Inserting a mason jar into my anus."}
-	],
-	round_cards: [
-		{id:1, text:"Being on fire."},
-		{id:2, text:"Racism."},
-		{id:3, text:"Old-people smell."},
-		{id:4, text:"A micro&shy;penis."},
-	],
-	can_vote: false,
+	// id: 1,
+	// round_id: 1,
+	// score_board: [
+	// 	{username:"iain" ,score: 10},
+	// 	{username:"player1" ,score: 14},
+	// 	{username:"player2" ,score: 9},
+	// 	{username:"player3" ,score: 4}
+	// ],
+	// black_card: [
+ //    {id:10, text:"kid tested, mother-approved."}
+ //      ],
+	// // hand: [
+	// // 	// {id:1, text:"Being on fire."},
+	// // 	// {id:2, text:"Racism."},
+	// // 	// {id:3, text:"Old-people smell."},
+	// // 	// {id:4, text:"A micro&shy;penis."},
+	// // 	// {id:5, text:"Women in yo&shy;gurt com&shy;mercials."},
+	// // 	// {id:6, text:"Classit under&shy;tones."},
+	// // 	// {id:7, text:"Not giving a shit about the Third World."},
+	// // 	// {id:8, text:"Inserting a mason jar into my anus."}
+	// // ],
+	// // round_cards: [
+	// // 	// {id:1, text:"Being on fire."},
+	// // 	// {id:2, text:"Racism."},
+	// // 	// {id:3, text:"Old-people smell."},
+	// // 	// {id:4, text:"A micro&shy;penis."},
+	// // ],
+	// can_vote: false,
 }
 
 var count=30;
@@ -95,14 +94,18 @@ function populate_vote_cards() {
 	});
 }
 
-function populate_hand() {
+function populate_hand(unique_id) {
 	var hand_column;
-	current_game_state.hand.forEach(function(card, index){
-    var column_num = index % 4;
-    hand_column = $('#hand-col-'+ column_num);
-    hand_column.html("");
-  });
-	current_game_state.hand.forEach(function(card, index){
+	current_game_state.hand.filter(function(card){
+		return card.card_user_id == unique_id;
+	}).forEach(function(card, index){
+	    var column_num = index % 4;
+	    hand_column = $('#hand-col-'+ column_num);
+	    hand_column.html("");
+	});
+	current_game_state.hand.filter(function(card){
+		return card.card_user_id == unique_id;
+	}).forEach(function(card, index){
 		var column_num = index % 4;
 		hand_column = $('#hand-col-'+ column_num);
 		hand_column.append(
@@ -161,16 +164,16 @@ $(document).ready(function() {
 		//add $.get() method hear to let game engine know 
 		//that the user has selected a card to be voted on
 
-    $.post('/round_cards/create', {"game_card_id": card_id, "game_user_id": user_id,
-      "round_id": current_game_state.round_id, game_id: current_game_state.id});
+	    $.post('/round_cards/create', {"game_card_id": card_id, "game_user_id": user_id,
+	      "round_id": current_game_state.round_id, game_id: current_game_state.id});
 
-    //create?game_card_id=' + card.id + '&game_user_id=' + user_id + '&round_id=' + current_game_state.round_id);
+	    //create?game_card_id=' + card.id + '&game_user_id=' + user_id + '&round_id=' + current_game_state.round_id);
 
-//		voting_row_2.append(
-//				'<div class="col-sm-2 white-card">' +
-//		        '<span class="white-card-text" id="'+ card_id+'">'+card_text+'</span>' +
-//		        '</div>'
-//		        );
+	//		voting_row_2.append(
+	//				'<div class="col-sm-2 white-card">' +
+	//		        '<span class="white-card-text" id="'+ card_id+'">'+card_text+'</span>' +
+	//		        '</div>'
+	//		        );
 		$(this).hide();
 		$('#hand').off('click', '.white-card');
 
@@ -200,11 +203,11 @@ $(document).ready(function() {
     // });
 
     
-    display_game_id();
-    show_black_card();
-    populate_scoreboard();
-    populate_vote_cards();
-    populate_hand();
+    // display_game_id();
+    // show_black_card();
+    // populate_scoreboard();
+    // populate_vote_cards();
+    // populate_hand();
 	timer();
 
 });

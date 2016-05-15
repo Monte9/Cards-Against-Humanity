@@ -10,7 +10,7 @@ class RoundCardsController < ApplicationController
 			r_card.card_id = game_card.id
 			r_card.game_user_id = params[:game_user_id]
 			r_card.round_id = params[:round_id]
-      r_card.save
+      		r_card.save
 			game_card.destroy
 
       GamesHelper.update_state params[:game_id], current_user.id
