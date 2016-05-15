@@ -7,7 +7,7 @@
     game_user.score = 0
     game_user.save
     GameCard.assign params[:game_id], current_user.id
-    @game_state = GamesHelper.generateState params[:game_id], current_user.id
+    GamesHelper.update_state params[:game_id], current_user.id
   end
 
   def delete
