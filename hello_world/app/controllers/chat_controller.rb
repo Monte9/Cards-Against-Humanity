@@ -5,7 +5,7 @@ skip_before_filter  :verify_authenticity_token
 
   def message
 
-    gameId = params[:gameID]
+    gameId = params[:id]
   	message = params[:message]
   	user = current_user.email
   	timestamp = Time.now().to_s(:time)

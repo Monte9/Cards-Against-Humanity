@@ -1,12 +1,12 @@
 
 
 #+var GAME_STATE = {
- #+	gameID: 1,
- #+	player_list: [
- #+		{email:"iain" ,score: 10},
- #+		{email:"player1" ,score: 14},
- #+		{email:"player2" ,score: 9},
- #+		{email:"player3" ,score: 4}
+ #+	id: 1,
+ #+	score_board: [
+ #+		{username:"iain" ,score: 10},
+ #+		{username:"player1" ,score: 14},
+ #+		{username:"player2" ,score: 9},
+ #+		{username:"player3" ,score: 4}
  #+	],
  #+	black_card: {id:10, text:"__________: kid tested, mother-approved."},
  #+	hand: [
@@ -19,7 +19,7 @@
  #+		{id:7, text:"Not giving a shit about the Third World."},
  #+		{id:8, text:"Inserting a mason jar into my anus."}
  #+	],
- #+	vote_cards: [
+ #+	round_cards: [
  #+		{id:1, text:"Being on fire."},
  #+		{id:2, text:"Racism."},
  #+		{id:3, text:"Old-people smell."},
