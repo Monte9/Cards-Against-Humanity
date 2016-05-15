@@ -27,12 +27,14 @@ def new
   @game.setup current_user.id
   gs = GamesHelper.update_state @game.id, current_user.id
   puts gs
+  gon.game_id = @game.id
   redirect_to :action => "show", :id=> @game.id
   
 end
 
 def show
   @game = Game.find params[:id]
+  gon.game_id = @game.id
   render 'start'
 end
 

@@ -6,5 +6,7 @@
   <script src="https://js.pusher.com/3.0/pusher.min.js"></script>
   <%= yield :javascript_includes %>
   <%= csrf_meta_tags %>
+  <%= include_gon(:init => true) %>
+    <%= Gon::Base.render_data({}) %>
 </head>
 </html>

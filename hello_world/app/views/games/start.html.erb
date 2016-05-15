@@ -4,7 +4,9 @@
 <header>
   <%= render 'layouts/application' %>
   <%= render 'layouts/menu' %>
+  <%= include_gon(:init => true) %>
 </header>
+
 <div id="chat-wrapper">
 	<div class="container">
 		<h4 id="game-id"></h4>

@@ -1,4 +1,4 @@
-var current_game_state = {
+ var current_game_state = {
 	gameID: 1,
 	round_id: 1,
 	player_list: [
@@ -26,7 +26,10 @@ var current_game_state = {
 	],
 	has_voted: false,
 }
-
+var game_id;
+if(gon){
+	game_id = gon.game_id
+	console.log(gon.game_id)}
 var count=30;
 var counter=setInterval(timer, 1000); //1000 will run it every 1 second
 
