@@ -4,13 +4,16 @@
 
 class VotesController < ApplicationController
 	def create
-		@vote = Vote.new
-		@vote.round_id = params[:round_id]
-		@vote.round_card_id = params[:round_card_id]
-		@vote.game_user_id = current_user.id
-		#redirect_to resolve_round
-		gs = GamesHelper.generateState params[:game_id], current_user.id
-  		render :json => gs
+		ActiveRecord::Base.transaction do
+	  		round = Round.find params[:round_id]
+			vote = Vote.new
+			vote.round_id = params[:round_id]
+			vote.round_card_id = params[:round_card_id]
+			vote.game_user_id = params[:game_user_id]
+			vote.save	
+		end
+		#after this commit we have a callback to update_game_state
+		#check vote.rb
 	end
 
 end

@@ -34,7 +34,7 @@ require 'json'
 
 module GamesHelper
 	
-	def self.generateState game_id, current_user_id
+	def self.update_state game_id, current_user_id
 		game = Game.find game_id
 		game_user = GameUser.
 			where("game_id= ? AND user_id=?",game_id,current_user_id).first
@@ -45,14 +45,43 @@ module GamesHelper
 		gs['num_players'] = game.player_count
 		
 		players = game.game_users
-		gs['score_board'] = complile_score_board players
+		
 		
 		gs['black_cards'] = complile_card_list round.game_black_cards
 		gs['hand'] = complile_card_list game_user.hand
 		gs['round_cards'] = complile_card_list round.round_cards
 		gs['votes']  = round.get_vote_tally
-		gs['winner'] = round.get_winner
+		
+		if round.all_cards_in?
+			gs['can_vote'] = true 
+		else
+			gs['can_vote'] = false
+		end
+
+		if game.should_end?
+			gs['game_end'] = true
+		else
+			gs['game_end'] = false
+		end
+
+		if game.should_start?
+			gs['started'] = true
+		else
+			gs['started'] = false
+		end
+			
+		if(round.all_votes_in?)
+			winner = round.get_winner
+			gs['winner'] = winner
+			round.update_score winner
+		end
+		gs['score_board'] = complile_score_board players
 		push gs
+		
+		if round.all_votes_in?
+			Round.create(game_id: game.id)
+			update_state game_id, current_user_id
+		end
 	end
 
 
@@ -68,10 +97,6 @@ module GamesHelper
     })
 
 	end
-
-
-	
-
 
 	def self.complile_score_board players
 		player_list = []

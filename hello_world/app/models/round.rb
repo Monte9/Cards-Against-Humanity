@@ -1,5 +1,5 @@
    	#t.integer  "game_id"
-    #t.integer  "game_card_id" --Black card.
+    #t.integer  "game_card_id" -- We aren't reall using this anymore, so we can remove it.
 class Round < ActiveRecord::Base
 
 	belongs_to :game
@@ -9,13 +9,11 @@ class Round < ActiveRecord::Base
 	has_many :game_users, through: :game
 
 	after_commit :request_black_cards
-	before_destroy :update_score
+
 
 	def request_black_cards
 		GameBlackCard.assign_to_round game.id, id
 	end
-
-
 
 	def get_vote_tally 
 		tally = Hash.new 
@@ -47,6 +45,9 @@ class Round < ActiveRecord::Base
 		result = tally.max_by{|k,v| v}
 		@winner_card = RoundCard.find result[0] unless result.nil?
 		@round_winner ||= GameUser.find @winner_card.game_user_id unless result.nil?
+	end
+
+	def done?
 
 	end
 

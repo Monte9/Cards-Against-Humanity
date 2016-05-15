@@ -25,15 +25,23 @@ class Game < ActiveRecord::Base
 	end
 	
 	def open?
-		return self.game_users.all.size < 6 
-	end
+		return self.game_users.all.size <  Rails::Application.config.MAX_PLAYERS
 
 	def player_count
 		return game_users.count
 	end
-
+	
 	def should_end?
-		self.game_users.count < 3
+		dur_after_creation = (Time.now) - self.created_at
+		if(dur_after_creation > Rails.application.config.MAX_GAME_INACTIVE_DURATION)
+			return false
+		end 
+		return self.game_users.count < Rails::Application.config.PLAYER_THRESOLD
+		
+	end
+
+	def should_start?
+		self.game_users.count >= Rails::Application.config.PLAYER_THRESOLD
 	end
 
 
