@@ -5,3 +5,5 @@ LOG:  database system is ready to accept connections
 FATAL:  database "cards-against-humanity-development" does not exist
 FATAL:  database "macbook" does not exist
 FATAL:  database "cards-against-humanity-development" does not exist
+FATAL:  lock file "postmaster.pid" already exists
+HINT:  Is another postmaster (PID 5311) running in data directory "/usr/local/var/postgres/data"?
