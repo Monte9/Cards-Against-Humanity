@@ -31,9 +31,9 @@ class Round < ActiveRecord::Base
 
 
 	def all_cards_in?
-		pick_count  = @game_black_card.pick_count
-		num_players = @game_users.count
-		card_count = @round_cards.count
+		pick_count  = game_black_cards.count
+		num_players = game_users.count
+		card_count = round_cards.count
 		return num_players*pick_count == card_count
 	end
 

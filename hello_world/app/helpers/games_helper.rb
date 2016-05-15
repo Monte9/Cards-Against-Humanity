@@ -52,7 +52,7 @@ module GamesHelper
 		gs['round_cards'] = complile_card_list round.round_cards
 		gs['votes']  = round.get_vote_tally
 		
-		if round.all_cards_in?
+		if !round.nil? && round.all_cards_in?
 			gs['can_vote'] = true 
 		else
 			gs['can_vote'] = false

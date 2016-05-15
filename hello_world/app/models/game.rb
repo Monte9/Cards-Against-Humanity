@@ -35,11 +35,11 @@ class Game < ActiveRecord::Base
 		if(dur_after_creation > Rails.application.config.MAX_GAME_INACTIVE_DURATION)
 			return false
 		end 
-		return self.game_users.count < Rails::Application.config.PLAYER_THRESOLD
+		return self.game_users.count < HelloWorld::Application.config.PLAYER_THRESOLD
 	end
 
 	def should_start?
-		self.game_users.count >= Rails::Application.config.PLAYER_THRESOLD
+		self.game_users.count >= HelloWorld::Application.config.PLAYER_THRESOLD
 	end
 
 
