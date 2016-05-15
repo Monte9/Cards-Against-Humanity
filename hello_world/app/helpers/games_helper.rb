@@ -73,7 +73,7 @@ module GamesHelper
 		if(round.all_votes_in?)
 			winner = round.get_winner
 			gs['winner'] = winner
-			round.update_score winner
+			round.update_score #winner
 		end
 		gs['score_board'] = compile_score_board players
 		push gs

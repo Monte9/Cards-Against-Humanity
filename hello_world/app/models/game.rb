@@ -15,6 +15,7 @@ class Game < ActiveRecord::Base
 
 		#on the creation of a GameUser  white cards will be assigned.
 		GameUser.create(game_id: id, user_id: current_user_id)
+		GameCard.assign id, current_user_id
 	end
 
 
