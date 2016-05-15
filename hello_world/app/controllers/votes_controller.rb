@@ -12,8 +12,10 @@ class VotesController < ApplicationController
 			vote.game_user_id = params[:game_user_id]
 			vote.save	
 		end
+		GamesHelper.update_state params[:game_id], current_user.id
 		#after this commit we have a callback to update_game_state
 		#check vote.rb
+		render nothing: true
 	end
 
 end

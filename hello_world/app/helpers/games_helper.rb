@@ -82,6 +82,7 @@ module GamesHelper
 			Round.create(game_id: game.id)
 			update_state game_id, current_user_id
 		end
+		
 	end
 
 
@@ -92,9 +93,9 @@ module GamesHelper
 		game = "game_#{game_state['id']}"
 		timestamp = Time.now().to_s(:time)	
 		Pusher.trigger( game, 'status_update', {
-      	game_state: gs_json,
-     	timestamp: timestamp
-    })
+	      	game_state: gs_json,
+	     	timestamp: timestamp
+	    })
 
 	end
 

@@ -9,7 +9,7 @@ class Vote < ActiveRecord::Base
 	belongs_to :round
 	belongs_to :round_card
 
-	after_commit :update_state
+	#after_commit :update_state
 
 	def update_state
 		GamesHelper.update_state round.game_id, current_user.id
