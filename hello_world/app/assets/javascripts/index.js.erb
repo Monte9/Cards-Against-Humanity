@@ -141,10 +141,10 @@ $(document).ready(function() {
 
 
 	$('.join_button').click(function(){
-		$.get( "game_users/create", { game_id: 1 } )
+		current_game_state.id = $(this).siblings('.open-game-id').first().html();
+		$.get( "game_users/create", { game_id: current_game_state.id} )
   			.done(function( data ) {
-    			alert( "Data Loaded: " + data );
-    			window.location.replace('games/start/'+1);
+    			window.location.replace('games/show/'+current_game_state.id);
  		 });
 	});
 
@@ -167,27 +167,27 @@ $(document).ready(function() {
 		$('#hand').off('click', '.white-card');
 	});
 
-    var pusher = new Pusher('0453f37d99fca4cb4e22', {
-      encrypted: true
-    });
+    // var pusher = new Pusher('0453f37d99fca4cb4e22', {
+    //   encrypted: true
+    // });
 
-    var chn_name = 'game_'.concat(current_game_state.id);
-    var channel = pusher.subscribe(chn_name);
-    channel.bind('message_sent', function(data) {
-      	$('#chat').append('<span class="user">' + data.user + ' @ </span><span class="timestamp"> ' + data.timestamp + ' </span> <br /><span class="message" style="color:red; float: right">' + data.message + '</span><br />')
+    // var chn_name = 'game_'.concat(current_game_state.id);
+    // var channel = pusher.subscribe(chn_name);
+    // channel.bind('message_sent', function(data) {
+    //   	$('#chat').append('<span class="user">' + data.user + ' @ </span><span class="timestamp"> ' + data.timestamp + ' </span> <br /><span class="message" style="color:red; float: right">' + data.message + '</span><br />')
 
 
-    });
+    // });
 
-    var game_state_channel = pusher.subscribe(chn_name);
-    game_state_channel.bind('status_update', function(data) {
-    	console.log(data.game_state);
-      current_game_state = JSON.parse(data.game_state);
-      show_black_card();
-      populate_scoreboard();
-      populate_vote_cards();
-      populate_hand();
-    });
+    // var game_state_channel = pusher.subscribe(chn_name);
+    // game_state_channel.bind('status_update', function(data) {
+    // 	console.log(data.game_state);
+    //   current_game_state = JSON.parse(data.game_state);
+    //   show_black_card();
+    //   populate_scoreboard();
+    //   populate_vote_cards();
+    //   populate_hand();
+    // });
 
     
     display_game_id();

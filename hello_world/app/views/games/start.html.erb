@@ -1,7 +1,4 @@
-<script type="text/javascript">  
-  var game_id = <%= @game.id unless @game.nil?%>;  
-</script>  
-<header>
+ <header>
   <%= render 'layouts/application' %>
   <%= render 'layouts/menu' %>
 </header>
@@ -64,3 +61,27 @@
   		</div>
 	</div>
 </div>
+<script type="text/javascript">  
+  var game_id = <%= @game.id unless @game.nil?%>; 
+      var pusher = new Pusher('0453f37d99fca4cb4e22', {
+      encrypted: true
+    });
+
+    var chn_name = 'game_'.concat(current_game_state.id);
+    var channel = pusher.subscribe(chn_name);
+    channel.bind('message_sent', function(data) {
+        $('#chat').append('<span class="user">' + data.user + ' @ </span><span class="timestamp"> ' + data.timestamp + ' </span> <br /><span class="message" style="color:red; float: right">' + data.message + '</span><br />')
+
+
+    });
+
+    var game_state_channel = pusher.subscribe(chn_name);
+    game_state_channel.bind('status_update', function(data) {
+      console.log(data.game_state);
+      current_game_state = JSON.parse(data.game_state);
+      show_black_card();
+      populate_scoreboard();
+      populate_vote_cards();
+      populate_hand();
+    }); 
+</script> 
