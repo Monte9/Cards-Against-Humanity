@@ -10,7 +10,7 @@ module HelloWorld
   class Application < Rails::Application
     config.PLAYER_THRESOLD = 3
     config.NUM_CARDS = 10
-    #Game should end if it doesn't attract enough players after this\
+    #Game should end if it doesn't atract enough players after this\
     config.MAX_GAME_INACTIVE_DURATION = 120 
     config.MAX_PLAYERS = 6
     # Settings in config/environments/* take precedence over those specified here.

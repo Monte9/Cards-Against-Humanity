@@ -5,6 +5,7 @@ class Game < ActiveRecord::Base
 	has_many :game_users
 	has_many :rounds
 	has_many :game_black_cards
+	
 	#this happens after a new game is created
 	def setup current_user_id
 		cu_id = current_user_id
@@ -12,20 +13,17 @@ class Game < ActiveRecord::Base
 		GameBlackCard.generate_deque id
 		#on the creation of round a black card is dealt using  a callback
 		round = Round.create(game_id: id)
-
 		#on the creation of a GameUser  white cards will be assigned.
 		GameUser.create(game_id: id, user_id: current_user_id)
 	end
-
-	
-
 
 	def current_round
 		Round.where("game_id = ?", id).order("created_at").last
 	end
 	
 	def open?
-		return self.game_users.all.size <  Rails::Application.config.MAX_PLAYERS
+		return self.game_users.all.size <  6
+	end
 
 	def player_count
 		return game_users.count
@@ -33,17 +31,15 @@ class Game < ActiveRecord::Base
 	
 	def should_end?
 		dur_after_creation = (Time.now) - self.created_at
-		if(dur_after_creation > Rails.application.config.MAX_GAME_INACTIVE_DURATION)
+		if(dur_after_creation > 120)
 			return false
 		end 
-		return self.game_users.count < Rails::Application.config.PLAYER_THRESOLD
-		
+		return self.game_users.count < 3
 	end
 
 	def should_start?
-		self.game_users.count >= Rails::Application.config.PLAYER_THRESOLD
+		self.game_users.count >= 3
 	end
-
 
 	def get_game_user_ids
 		GameUser.where game_id: self.id
@@ -57,6 +53,5 @@ class Game < ActiveRecord::Base
 	def add_game_user user_id
 		GameUser.create(user_id: user_id, game_id: id)	
 	end
-
 	
 end

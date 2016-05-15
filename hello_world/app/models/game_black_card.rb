@@ -5,6 +5,9 @@
 class GameBlackCard < ActiveRecord::Base
 	belongs_to :card
 	belongs_to :round
+	belongs_to :game
+
+
 
 	def self.generate_deque g_id 
 		cards = Card.where("is_black=?", true)
@@ -13,6 +16,15 @@ class GameBlackCard < ActiveRecord::Base
   				GameBlackCard.create(game_id: g_id, card_id: card.id,round_id: -1)
   			}
 		end
+	end
+
+
+	def text 
+		return card.text
+	end
+
+	def pick_count
+		return card.pick_count
 	end
 
 

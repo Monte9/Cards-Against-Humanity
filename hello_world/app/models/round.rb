@@ -3,7 +3,7 @@
 class Round < ActiveRecord::Base
 
 	belongs_to :game
-	has_many :game_black_cards
+	has_one :game_black_card
 	has_many :round_cards
 	has_many :votes
 	has_many :game_users, through: :game

@@ -7,4 +7,10 @@ class RoundCard < ActiveRecord::Base
 	belongs_to :round
 	belongs_to :game_user
 	has_many :votes
+
+	after_commit :update_state
+
+	def update_state
+		GamesHelper.update_state round.game_id, current_user.id
+	end
 end	
