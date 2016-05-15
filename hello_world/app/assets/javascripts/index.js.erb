@@ -1,3 +1,5 @@
+var user_id = <%= @current_user.__id__ %>
+
 var current_game_state = {
 	id: 1,
 	round_id: 1,
@@ -134,7 +136,7 @@ $(document).ready(function() {
     	var card_id = $(this).parent().attr('id');
 
  
-    	$.get('/votes/create?game_id='+current_game_state.id+'&round_id='+current_game_state.round_id+'&card_round_id='+card_id+'');
+    	$.get('/votes/create?game_id='+current_game_state.id+'&round_id='+current_game_state.round_id+'&card_round_id='+card_id);
 
     	$('button').remove('.up-vote');
 	});
@@ -158,6 +160,10 @@ $(document).ready(function() {
 		//add $.get() method hear to let game engine know 
 		//that the user has selected a card to be voted on
 
+    $.post('/round_cards/create', {"game_card_id": card_id, "game_user_id": user_id,
+      "round_id": current_game_state.round_id, game_id: current_game_state.id});
+    //create?game_card_id=' + card.id + '&game_user_id=' + user_id + '&round_id=' + current_game_state.round_id);
+
 		voting_row_2.append(
 				'<div class="col-sm-2 white-card">' +
 		        '<span class="white-card-text" id="'+ card_id+'">'+card_text+'</span>' +
@@ -165,6 +171,8 @@ $(document).ready(function() {
 		        );
 		$(this).hide();
 		$('#hand').off('click', '.white-card');
+
+
 	});
 
     // var pusher = new Pusher('0453f37d99fca4cb4e22', {

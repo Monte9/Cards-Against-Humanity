@@ -21,7 +21,7 @@ class GameBlackCard < ActiveRecord::Base
 		round = Round.find rnd_id
 		black_cards  = GameBlackCard.where("game_id = ? AND round_id = ?", game_id, -1)
 		blk_card = nil
-		if round.game_users[0].nil?
+		if round.game_users[1].nil?
 			blk_card = GameBlackCard.take
 		else 
 			black_cards.find_each do |black_card|
@@ -31,7 +31,8 @@ class GameBlackCard < ActiveRecord::Base
 				end
 			end
 		end 
-		blk_card.update(round_id: rnd_id)
+		blk_card.update(round_id: rnd_id+1)
+		blk_card.save
 	end
 
 end

@@ -6,6 +6,7 @@ class GameCard < ActiveRecord::Base
 	belongs_to :game 
 	belongs_to :round 
 	belongs_to :card
+	has_many :round_cards
 
 	def self.generate_deque game_id
 		cards = Card.where("is_black=?", false)
