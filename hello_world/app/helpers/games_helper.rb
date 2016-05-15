@@ -47,9 +47,9 @@ module GamesHelper
 		players = game.game_users
 		
 		
-		gs['black_cards'] = complile_card_list round.game_black_cards
-		gs['hand'] = complile_card_list game_user.hand
-		gs['round_cards'] = complile_card_list round.round_cards
+		gs['black_cards'] = compile_card_list round.game_black_cards
+		gs['hand'] = compile_card_list game_user.hand
+		gs['round_cards'] = compile_card_list round.round_cards
 		gs['votes']  = round.get_vote_tally
 		
 		if !round.nil? && round.all_cards_in?
@@ -75,7 +75,7 @@ module GamesHelper
 			gs['winner'] = winner
 			round.update_score winner
 		end
-		gs['score_board'] = complile_score_board players
+		gs['score_board'] = compile_score_board players
 		push gs
 		
 		if round.all_votes_in?
@@ -98,7 +98,7 @@ module GamesHelper
 
 	end
 
-	def self.complile_score_board players
+	def self.compile_score_board players
 		player_list = []
 		players.each do |player|
 			player_list << {'username' => player.username,
@@ -107,7 +107,7 @@ module GamesHelper
 		return player_list
 	end
 
-	def self.complile_card_list game_cards
+	def self.compile_card_list game_cards
 		card_list  = []
 		game_cards.each do |game_card|
 			card_list << {'id' => game_card.id,
