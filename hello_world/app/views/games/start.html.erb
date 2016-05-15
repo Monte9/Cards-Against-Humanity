@@ -65,7 +65,7 @@
   var user_id = <%= current_user.id %>;
   var game_id = <%= @game.id %>; 
 
-      var pusher = new Pusher('0453f37d99fca4cb4e22', {
+    var pusher = new Pusher('0453f37d99fca4cb4e22', {
       encrypted: true
     });
 
@@ -83,11 +83,14 @@
       current_game_state = JSON.parse(data.game_state);
       show_black_card();
       populate_scoreboard();
-      populate_vote_cards();
+      populate_vote_cards(user_id);
       populate_hand(user_id);
     }); 
 
-    current_game_state.id = game_id;
+    //current_game_state.id = game_id;
+    setInterval(function() {
+      $.get('/games/game_state?game_id='+game_id+'&game_user_id='+user_id);
+    },3000);
 
-    $.get('/games/game_state?game_id='+current_game_state.id+'&game_user_id='+user_id);
+    $.get('/games/game_state?game_id='+game_id+'&game_user_id='+user_id);
 </script> 

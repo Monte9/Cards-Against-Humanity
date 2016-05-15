@@ -62,14 +62,16 @@ function populate_scoreboard(){
 	});
 }
 
-function populate_vote_cards() {
+function populate_vote_cards(unique_id) {
 	var voting_row_1 = $('#voting-row-1');
 
-	var up_vote_button = current_game_state.can_vote ? '<button class="btn btn-default up-vote"><%= image_tag "Thumb-Up.png", height: "20" %></button>' : '';
+	var up_vote_button;
 
   voting_row_1.html("")
 
 	current_game_state.round_cards.forEach(function(card, index){
+		up_vote_button = (card.card_user_id != unique_id)
+			? '<button class="btn btn-default up-vote"><%= image_tag "Thumb-Up.png", height: "20" %></button>' : '';
 		if (index == 0) {
 			voting_row_1.append(
 				'<div class="col-sm-2 white-card">' +

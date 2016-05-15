@@ -49,7 +49,7 @@ module GamesHelper
 		gs['black_cards'] = compile_card_list round.game_black_cards
 		gs['hand'] = compile_card_list game_user.hand(game.id)
 		gs['round_cards'] = compile_card_list round.round_cards
-		gs['votes']  = round.get_vote_tally
+		gs['votes']  = Hash.new #round.get_vote_tally
 		
 		if !round.nil? && round.all_cards_in?
 			gs['can_vote'] = true 
@@ -90,6 +90,7 @@ module GamesHelper
 		gs_json = game_state.to_json
 		puts gs_json
 		game = "game_#{game_state['id']}"
+		puts game
 		timestamp = Time.now().to_s(:time)	
 		Pusher.trigger( game, 'status_update', {
 	      	game_state: gs_json,
