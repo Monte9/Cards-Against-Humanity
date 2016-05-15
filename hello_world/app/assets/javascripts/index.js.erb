@@ -53,6 +53,9 @@ function show_black_card(){
 
 function populate_scoreboard(){
 	var scoreboard = $('#scoreboard');
+	scoreboard.html('<tr><th>User</th><th>Score</th></tr>');
+
+
 	current_game_state.score_board.forEach(function(player){
 		scoreboard.append(
 			'<tr>'+
@@ -70,7 +73,7 @@ function populate_vote_cards(unique_id) {
   voting_row_1.html("")
 
 	current_game_state.round_cards.forEach(function(card, index){
-		up_vote_button = (card.card_user_id != unique_id)
+		up_vote_button = (current_game_state.can_vote == true && card.card_user_id != unique_id)
 			? '<button class="btn btn-default up-vote"><%= image_tag "Thumb-Up.png", height: "20" %></button>' : '';
 		if (index == 0) {
 			voting_row_1.append(

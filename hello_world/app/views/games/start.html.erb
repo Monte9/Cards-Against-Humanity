@@ -88,7 +88,7 @@
     }); 
 
     //current_game_state.id = game_id;
-    setInterval(function() {
+    setTimeout(function() {
       $.get('/games/game_state?game_id='+game_id+'&game_user_id='+user_id);
     },3000);
 
