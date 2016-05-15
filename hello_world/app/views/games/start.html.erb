@@ -1,5 +1,5 @@
 <script type="text/javascript">  
-  var game_id = <%= @game.id%>;  
+  var game_id = <%= @game.id unless @game.nil?%>;  
 </script>  
 <header>
   <%= render 'layouts/application' %>
@@ -7,7 +7,7 @@
 </header>
 <div id="chat-wrapper">
 	<div class="container">
-		<h4 id="game-id"><% @game.id %> </h4>
+		<h4 id="game-id"></h4>
     	<div class="row">
       		<div class="col-sm-10" id="table">
             <div class="row" id="playing-field">

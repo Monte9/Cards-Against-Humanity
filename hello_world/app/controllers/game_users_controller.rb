@@ -8,7 +8,6 @@
     game_user.save
     GameCard.assign params[:game_id], current_user.id
     @game_state = GamesHelper.generateState params[:game_id], current_user.id
-    render :json => @game_state 
   end
 
   def delete
