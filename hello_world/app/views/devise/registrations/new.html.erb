@@ -3,32 +3,39 @@
   <%= render 'layouts/menu' %>
 </header>
 
+<div class="container">
+    <div class="row text-center">
+      <div class="col-lg-12" style="#FFFFFF">
 <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
-
-  <div class="field">
+  <br />
+  <div class="field" style="color:#FFFFFF">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <div style="color:#000000"><%= f.email_field :email, autofocus: true %></div>
   </div>
+  <br />
 
-  <div class="field">
+  <div class="field" style="color:#FFFFFF">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <div style="color:#000000"><%= f.password_field :password, autocomplete: "off" %></div>
   </div>
+  <br />
 
-  <div class="field">
+  <div class="field" style="color:#FFFFFF">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <div style="color:#000000"><%= f.password_field :password_confirmation, autocomplete: "off" %></div>
   </div>
+  <br />
 
-  <div class="actions">
+  <div class="actions" style="color:#000000">
     <%= f.submit "Sign up" %>
   </div>
+</div>
+</div>
+</div>
 <% end %>
-
-<%= render "devise/shared/links" %>
