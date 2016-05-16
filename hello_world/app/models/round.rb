@@ -3,15 +3,15 @@
 class Round < ActiveRecord::Base
 
 	belongs_to :game
-	has_many :game_black_cards
+	has_one :game_black_card
 	has_many :round_cards
 	has_many :votes
 	has_many :game_users, through: :game
 
-	after_commit :request_black_cards
+	after_commit :request_black_card
 
 
-	def request_black_cards
+	def request_black_card
 		GameBlackCard.assign_to_round game.id, id
 	end
 
@@ -23,23 +23,17 @@ class Round < ActiveRecord::Base
    		return tally 
    	end
 
-
 	def all_votes_in?
 		votes.count == game_users.count
 	end
 
-
-
 	def all_cards_in?
-		# pick_count  = game_black_cards.count
+		pick_count  = game_black_card.pick_count
 		num_players = game_users.count
 		card_count = round_cards.count
 		return num_players == card_count
 	end
 
-
-
-	
 	def get_winner
 		tally = get_vote_tally
 		result = tally.max_by{|k,v| v}
@@ -60,17 +54,11 @@ class Round < ActiveRecord::Base
 
 	end
 
-
-
-
 	def update_score
 		if @winner_card != nil
 			@round_winner.add_to_score 10
 		end
 	end
-
-	
-
 
 	def num_cards_left
 		gu_id = game_users[0].id
