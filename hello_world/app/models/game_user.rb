@@ -13,7 +13,9 @@ class GameUser < ActiveRecord::Base
 	end
 	
 	def add_to_score amt
-		self.update(score: score+=amt)
+		s = self.score
+		s += amt
+		self.update(score: s)
 	end
 
 	def request_game_start

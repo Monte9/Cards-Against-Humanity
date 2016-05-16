@@ -31,10 +31,10 @@ class Round < ActiveRecord::Base
 
 
 	def all_cards_in?
-		pick_count  = game_black_cards.count
+		# pick_count  = game_black_cards.count
 		num_players = game_users.count
 		card_count = round_cards.count
-		return num_players*pick_count == card_count
+		return num_players == card_count
 	end
 
 
@@ -43,8 +43,17 @@ class Round < ActiveRecord::Base
 	def get_winner
 		tally = get_vote_tally
 		result = tally.max_by{|k,v| v}
-		@winner_card = RoundCard.find result[0] unless result.nil?
-		@round_winner ||= GameUser.find @winner_card.game_user_id unless result.nil?
+
+		if result.nil? then 
+			result = tally.keys.sample
+		else 
+			result = result[0]
+		end
+
+		puts result
+
+		@winner_card = RoundCard.find result 
+		@round_winner ||= GameUser.find @winner_card.game_user_id 
 	end
 
 	def done?
@@ -56,7 +65,7 @@ class Round < ActiveRecord::Base
 
 	def update_score
 		if @winner_card != nil
-			@winner_game_user.add_to_score 10
+			@round_winner.add_to_score 10
 		end
 	end
 

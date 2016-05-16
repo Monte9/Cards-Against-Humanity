@@ -14,7 +14,8 @@ class Game < ActiveRecord::Base
 		round = Round.create(game_id: id)
 
 		#on the creation of a GameUser  white cards will be assigned.
-		GameUser.create(game_id: id, user_id: current_user_id)
+		initial_score = 0
+		GameUser.create(game_id: id, user_id: current_user_id, score: initial_score)
 		GameCard.assign id, current_user_id
 	end
 

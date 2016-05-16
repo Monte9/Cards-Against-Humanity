@@ -80,7 +80,14 @@
     var game_state_channel = pusher.subscribe(chn_name);
     game_state_channel.bind('status_update', function(data) {
       console.log(data.game_state);
-      current_game_state = JSON.parse(data.game_state);
+      new_game_state = JSON.parse(data.game_state);
+
+      if (current_game_state.round_id < new_game_state.round_id) {
+        add_hand_click_listener();
+        has_voted = false;
+      }
+
+      current_game_state = new_game_state;
       show_black_card();
       populate_scoreboard();
       populate_vote_cards(user_id);
@@ -90,7 +97,7 @@
     //current_game_state.id = game_id;
     setTimeout(function() {
       $.get('/games/game_state?game_id='+game_id+'&game_user_id='+user_id);
-    },3000);
+    },1000);
 
     $.get('/games/game_state?game_id='+game_id+'&game_user_id='+user_id);
 </script> 

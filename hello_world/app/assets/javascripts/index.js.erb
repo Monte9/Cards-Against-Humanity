@@ -29,6 +29,7 @@ var current_game_state = {
 	// // ],
 	// can_vote: false,
 }
+var has_voted = false;
 
 var count=30;
 var counter=setInterval(timer, 1000); //1000 will run it every 1 second
@@ -73,7 +74,7 @@ function populate_vote_cards(unique_id) {
   voting_row_1.html("")
 
 	current_game_state.round_cards.forEach(function(card, index){
-		up_vote_button = (current_game_state.can_vote == true && card.card_user_id != unique_id)
+		up_vote_button = (has_voted == false && current_game_state.can_vote == true && card.card_user_id != unique_id)
 			? '<button class="btn btn-default up-vote"><%= image_tag "Thumb-Up.png", height: "20" %></button>' : '';
 		if (index == 0) {
 			voting_row_1.append(
@@ -121,45 +122,7 @@ function populate_hand(unique_id) {
 	});
 }
 
-$(document).ready(function() {
-	console.log('Loaded DOM');
-	$('#sendChat').click(function() {
-		var value = $('#chatbox').val();
-		if( !value) {
-			console.log("You f'ed up");
-		} else {
-			console.log(value);
-
-			var URI = '/chat/message';
-			var payload = {message: value, id: game_id};
-
-			$.post(URI, payload, function() {
-				$('#chatbox').val("");
-				console.log("Made post request");
-			});
-		}	
-	});
-
-	$('#voting-row-1').on('click', '.up-vote', function() {
-    	current_game_state.can_vote = false;
-    	var card_id = $(this).parent().attr('id');
-
- 
-    	$.get('/votes/create?game_id='+current_game_state.id+'&round_id='+current_game_state.round_id+'&card_round_id='+card_id);
-
-    	$('button').remove('.up-vote');
-	});
-
-
-	$('.join_button').click(function(){
-		current_game_state.id = $(this).siblings('.open-game-id').first().html();
-		$.get( "game_users/create", { game_id: current_game_state.id} )
-  			.done(function( data ) {
-    			window.location.replace('games/show/'+current_game_state.id);
- 		 });
-	});
-
-
+function add_hand_click_listener() {
 	$('#hand').on('click', '.white-card', function() {
 		var voting_row_2 = $('#voting-row-2');
 		var card = $(this).children().first();
@@ -184,6 +147,75 @@ $(document).ready(function() {
 
 
 	});
+}
+
+
+$(document).ready(function() {
+	console.log('Loaded DOM');
+	$('#sendChat').click(function() {
+		var value = $('#chatbox').val();
+		if( !value) {
+			console.log("You f'ed up");
+		} else {
+			console.log(value);
+
+			var URI = '/chat/message';
+			var payload = {message: value, id: game_id};
+
+			$.post(URI, payload, function() {
+				$('#chatbox').val("");
+				console.log("Made post request");
+			});
+		}	
+	});
+
+	$('#voting-row-1').on('click', '.up-vote', function() {
+    	has_voted = true;
+    	var card_id = $(this).parent().attr('id');
+
+ 
+    	$.get('/votes/create?game_id='+current_game_state.id+'&round_id='+current_game_state.round_id+'&card_round_id='+card_id);
+
+    	$('button').remove('.up-vote');
+	});
+
+
+	$('.join_button').click(function(){
+		current_game_state.id = $(this).siblings('.open-game-id').first().html();
+		$.get( "game_users/create", { game_id: current_game_state.id} )
+  			.done(function( data ) {
+    			window.location.replace('games/show/'+current_game_state.id);
+ 		 });
+	});
+
+
+	// $('#hand').on('click', '.white-card', function() {
+	// 	var voting_row_2 = $('#voting-row-2');
+	// 	var card = $(this).children().first();
+	// 	var card_text = card.text();
+	// 	var card_id = card.attr('id');
+
+	// 	//add $.get() method hear to let game engine know 
+	// 	//that the user has selected a card to be voted on
+
+	//     $.post('/round_cards/create', {"game_card_id": card_id, "game_user_id": user_id,
+	//       "round_id": current_game_state.round_id, game_id: current_game_state.id});
+
+	//     //create?game_card_id=' + card.id + '&game_user_id=' + user_id + '&round_id=' + current_game_state.round_id);
+
+	// //		voting_row_2.append(
+	// //				'<div class="col-sm-2 white-card">' +
+	// //		        '<span class="white-card-text" id="'+ card_id+'">'+card_text+'</span>' +
+	// //		        '</div>'
+	// //		        );
+	// 	$(this).hide();
+	// 	$('#hand').off('click', '.white-card');
+
+
+	// });
+	
+	add_hand_click_listener();
+
 
     // var pusher = new Pusher('0453f37d99fca4cb4e22', {
     //   encrypted: true

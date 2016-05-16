@@ -75,6 +75,8 @@ module GamesHelper
 			round.update_score #winner
 		end
 		gs['score_board'] = compile_score_board players
+
+		gs['has_voted'] = VotesHelper.has_voted game_id, round.id
 		push gs
 		
 		if round.all_votes_in?
