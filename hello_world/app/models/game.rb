@@ -17,6 +17,7 @@ class Game < ActiveRecord::Base
 		initial_score = 0
 		GameUser.create(game_id: id, user_id: current_user_id, score: initial_score)
 		GameCard.assign id, current_user_id
+		GameBlackCard.assign_to_round id, round.id
 	end
 
 

@@ -8,7 +8,7 @@ class GameUser < ActiveRecord::Base
 
 	def username 
 		unless self.user_id.nil?
-			user.username
+			User.find_by(id: self.user_id).username
 		end
 	end
 	
