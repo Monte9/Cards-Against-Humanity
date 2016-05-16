@@ -80,7 +80,7 @@ module GamesHelper
 		push gs
 		
 		if round.all_votes_in?
-			Round.create(game_id: game.id)
+			Round.create(game_id: game.id).request_black_card
 			update_state game_id, current_user_id
 		end
 		

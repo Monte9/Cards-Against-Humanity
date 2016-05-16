@@ -61,7 +61,7 @@ class Round < ActiveRecord::Base
 	end
 
 	def num_cards_left
-		gu_id = game_users[0].id
+		gu_id = game_users[0].user_id
 		GameCard.where("game_id = ? AND game_user_id = ?", game_id,gu_id ).count
 	end
 
