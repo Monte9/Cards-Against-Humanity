@@ -46,7 +46,7 @@ module GamesHelper
 		players = game.game_users
 		
 		blk_card = round.game_black_card
-		gs['black_cards'] = blk_card.card.text
+		gs['black_cards'] = {:id => blk_card.id, :text => blk_card.card.text}
 		gs['hand'] = compile_card_list game_user.hand(game.id)
 		gs['round_cards'] = compile_card_list round.round_cards
 		gs['votes']  = Hash.new #round.get_vote_tally
