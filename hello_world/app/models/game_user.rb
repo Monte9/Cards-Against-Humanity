@@ -7,9 +7,11 @@ class GameUser < ActiveRecord::Base
 	has_many :rounds, through: :game
 
 	def username 
+		name = "johnSmith"
 		unless self.user_id.nil?
-			User.find_by(id: self.user_id).username
+			name = User.find_by(id: self.user_id).email
 		end
+		name
 	end
 	
 	def add_to_score amt
