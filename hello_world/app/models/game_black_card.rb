@@ -6,6 +6,10 @@ class GameBlackCard < ActiveRecord::Base
 	belongs_to :card
 	belongs_to :round
 
+	def pick_count
+		card.pick_count
+	end
+
 	def self.generate_deque g_id 
 		cards = Card.where("is_black=?", true)
 		ActiveRecord::Base.transaction do
@@ -31,7 +35,7 @@ class GameBlackCard < ActiveRecord::Base
 				end
 			end
 		end 
-		blk_card.update(round_id: rnd_id+1)
+		blk_card.update(round_id: rnd_id)
 		blk_card.save
 	end
 
